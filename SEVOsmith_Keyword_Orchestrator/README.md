@@ -58,47 +58,57 @@ Talk is cheap. The real proof is in the final product. Click on the live demos b
 
 <details>
 <summary><strong>► Click to expand the full architectural breakdown</strong></summary>
-
 ```mermaid
 graph TD;
     subgraph "Module 1: Initiation"
-        A[▶️ Start: Trigger <br/> (e.g., New Row in Google Sheet)] --> B[⚙️ Get Seed Keyword & Settings];
+        A["▶️ Start: Trigger
+        (e.g., New Row in Google Sheet)"] --> B["⚙️ Get Seed Keyword & Settings"];
     end
 
     subgraph "Module 2: Caching & Efficiency"
         B --> C{Cache Hit?};
     end
 
-    subgraph "Module 3: Live Data Fetching (Cache Miss)"
-        C -- No --> D[📡 Enrich Data via APIs <br/> (DataForSEO, OpenAI, etc.)];
+    %% --- Branching Logic from Module 2 ---
+    %% This is the Cache Hit Path, bypassing Modules 3 & 4
+    C -- Yes --> G; 
+    %% This is the Cache Miss Path, proceeding to Module 3
+    C -- No --> D;  
+
+    subgraph "Module 3: Live Data Fetching"
+        D["📡 Execute Parallel API Calls
+        (DataForSEO)"] --> D_Check{"API Calls Successful?"};
+    end
+    
+    subgraph "Module 6: Failure Notification"
+        D_Check -- No --> F_Start["❌ Log Error & Update Status to 'Error'"];
+        F_Start --> F_Notify["📧 Send Failure Notification Email"];
+        F_Notify --> F_End[🛑 Stop with Error];
     end
 
-    subgraph "Module 4: Synthesis"
-        D --> E[🧠 Analyze & Structure Data <br/> (Normalize & Compact)];
+    subgraph "Module 4: Synthesis (Success Path)"
+        D_Check -- Yes --> E["🧠 Analyze & Structure Data
+        (Normalize & Compact)"];
     end
 
-    subgraph "Module 6: Finalization & Caching"
-        E --> F[💾 Store Enriched Data <br/> (e.g., NocoDB, Google Sheets)];
-        F --> G[📝 Generate Interactive Report <br/> (HTML)];
-        G --> H[📤 Deliver Report & Notify <br/> (Upload to S3, Send Email)];
-        H --> I[✅ Process Complete];
-        
-        %% Create the cache for the next run
+    subgraph "Module 5: Output & Finalization (Success Path)"
         E --> J(➕ Create Cache Entry);
-        J --> F;
-    end
-
-    subgraph "Cache Hit Path"
-        %% The 'Yes' path skips the API calls
-        C -- Yes --> G;
+        J --> G["📝 Generate Interactive Report
+        (HTML)"];
+        G --> H["📤 Deliver Report & Notify
+        (Upload to S3, Send Email)"];
+        H --> I[✅ Update Status to 'Completed' & Finish];
     end
 
     %% Styling
     style A fill:#D5E8D4,stroke:#82B366
     style I fill:#D5E8D4,stroke:#82B366
     style C fill:#FFE6CC,stroke:#D79B00
-    style J fill:#DAE8FC,stroke:#6C8EBF
-```
+    style D_Check fill:#FFE6CC,stroke:#D79B00
+    style F_Start fill:#F8CECC,stroke:#B85450
+    style F_Notify fill:#F8CECC,stroke:#B85450
+    style F_End fill:#F8CECC,stroke:#B85450```
+    
 1.  **Job Initiation & State Management:** A robust, stateful job queue using Google Sheets ensures every research task is processed reliably (`To_Do` -> `Processing` -> `Completed`).
 
 2.  **Intelligent Caching & Cost Control:** A unique `cache_key` is generated for each job. The workflow queries an internal n8n Data Table first, bypassing all API calls on a cache hit.
