@@ -64,27 +64,33 @@ flowchart TD
         A["▶️ Start: Trigger
         (e.g., New Row in Google Sheet)"] --> B["⚙️ Get Seed Keyword & Settings"];
     end
+
     subgraph mod2["Module 2: Caching & Efficiency"]
         B --> C{Cache Hit?};
     end
+
     %% --- Branching Logic from Module 2 ---
     %% This is the Cache Hit Path, bypassing Modules 3 & 4
     C -- Yes --> G; 
     %% This is the Cache Miss Path, proceeding to Module 3
     C -- No --> D;  
+
     subgraph mod3["Module 3: Live Data Fetching"]
         D["📡 Execute Parallel API Calls
         (DataForSEO)"] --> D_Check{"API Calls Successful?"};
     end
+    
     subgraph mod6["Module 6: Failure Notification"]
         D_Check -- No --> F_Start["❌ Log Error & Update Status to 'Error'"];
         F_Start --> F_Notify["📧 Send Failure Notification Email"];
         F_Notify --> F_End[🛑 Stop with Error];
     end
+
     subgraph mod4["Module 4: Synthesis (Success Path)"]
         D_Check -- Yes --> E["🧠 Analyze & Structure Data
         (Normalize & Compact)"];
     end
+
     subgraph mod5["Module 5: Output & Finalization (Success Path)"]
         E --> J(➕ Create Cache Entry);
         J --> G["📝 Generate Interactive Report
@@ -93,6 +99,7 @@ flowchart TD
         (Upload to S3, Send Email)"];
         H --> I[✅ Update Status to 'Completed' & Finish];
     end
+
     %% Styling
     style A fill:#D5E8D4,stroke:#82B366
     style I fill:#D5E8D4,stroke:#82B366
