@@ -144,6 +144,8 @@ flowchart TD
     *   **Raw Data Template:** [Copy this template](https://docs.google.com/spreadsheets/d/1CZsJ5Mh2cwh6i0WlDb3HaBk96_bBm71HLkBAZneYvYY/edit?gid=2108933567#gid=2108933567), name it `KW_Research_Template_Source`, and move it into your `KW_research_raw_data` folder.
 4.  **Create n8n Data Table:** In n8n, go to "Data tables" and create a table named `SEVOsmith_KW_Cache` with four `String` columns: `Project`, `session_id`, `cache_id`, `cache_content`.
 
+![SEVOsmith Keyword Orchestrator Manager Sheet](screenshots/SEVOsmith-Keyword-Orchestrator-Compain-Start-Sheet.jpg)
+
 #### **Step 2: Configuration**
 1.  **Create n8n Credentials:** In n8n, create the necessary credentials: `HTTP Basic Auth` (for DataForSEO), `Google OAuth2`, `Gmail OAuth2`, and `AWS` (for S3/R2).
 2.  **Populate Settings Sheet:** Open your `SEVOsmith_Manager_Sheet`, go to the `KW_Reseach_Setting` tab, and populate the values.
@@ -160,6 +162,8 @@ flowchart TD
 | Email to receive report | `your.email@example.com` |
 | **Google Drive Folder id** | *<ID of your `KW_research_report` folder>* |
 | **Cloudflade R2 link** | *<Your public R2/S3 bucket URL>* |
+
+![SEVOsmith Keyword Orchestrator KW Research Setting](screenshots/SEVOsmith-Keyword-Orchestrator-KW-Research-Setting-Sheet.jpg)
 
 #### **Step 3: Connect, Save, and Activate**
 1.  **Assign Credentials** to all relevant nodes in the workflow.
