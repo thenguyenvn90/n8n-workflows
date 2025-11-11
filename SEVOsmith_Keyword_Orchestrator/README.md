@@ -181,6 +181,8 @@ flowchart TD
 *   The workflow will trigger, updating the status to `Processing` and finally `Completed` or `Error`.
 *   Check your email or the sheet for links to the deliverables.
 
+![SEVOsmith Keyword Orchestrator: Email notification when report is ready](screenshots/Email-Notify-Research-Report-is-Ready.jpg)
+
 #### **Troubleshooting**
 *   **Workflow Doesn't Trigger:** Ensure `Action` and `Status` values are exact (case-sensitive).
 *   **Execution Fails:** Check the `Notes` column in the sheet and your email for a detailed error message.
@@ -193,6 +195,8 @@ flowchart TD
 *   **Understanding Caching:** The first run for a unique keyword is a "cache miss" and uses APIs. Subsequent runs are "cache hits" and are instant and free.
 *   **Managing API Costs:** The `Litmit` parameter in your settings sheet controls the depth of research and directly impacts your DataForSEO API costs.
 *   **Error Handling:** The workflow has a built-in error path that will catch API failures, update your sheet with a specific error, and send an alert email.
+*   
+![SEVOsmith Keyword Orchestrator: Email notification on Error](screenshots/Email-Notify-on-Error.jpg)
 
 ## 💡 The Road Ahead: The Full SEVOsmith Vision
 
