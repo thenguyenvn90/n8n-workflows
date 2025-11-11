@@ -15,7 +15,7 @@ It's not just another template; it's a production-grade system engineered to eli
 
 <br>
 
-[![Get it on Gumroad](https://img.shields.io/badge/Get%20the%20Workflow-Gumroad-%23FF90E8?style=for-the-badge&logo=gumroad)](<YOUR_GUMROAD_LINK_HERE>)
+[![Get it on Gumroad](https://img.shields.io/badge/Get%20the%20Workflow-Gumroad-%23FF90E8?style=for-the-badge&logo=gumroad)](https://nextgrowth.gumroad.com/l/SEVOsmith-Automated-n8n-Keyword-Research)
 
 > **Note:** This workflow is offered on Gumroad to help support its continued development and to allow for optional tips. Your support is greatly appreciated!
 
@@ -28,11 +28,11 @@ It's not just another template; it's a production-grade system engineered to eli
 2.  [📊 The Proof: See the Final Report](#2-the-proof-see-the-final-report-for-yourself)
 3.  [💡 The Potential: Your New Automation Launchpad](#3-the-potential-your-new-automation-launchpad)
 4.  [⚙️ The Engine Room: A Technical Deep Dive](#4-the-engine-room-a-technical-deep-dive)
-5.  [🚀 Setup & User Guide](#5-setup--user-guide)
-6.  [🔮 The Future: The Full SEVOsmith Vision](#6-the-future-the-full-sevosmith-vision)
-7.  [❤️ Support the Project](#️-support-the-project)
-8.  [📄 License](#-license)
-
+5.  [🚀 Setup & User Guide](#6-setup--user-guide)
+6.  [📚 Dive Deeper: Strategic Guides & Tutorials](#5-dive-deeper-strategic-guides--tutorials)
+7.  [🔮 The Future: The Full SEVOsmith Vision](#7-the-future-the-full-sevosmith-vision)
+8.  [❤️ Support the Project](#️-support-the-project)
+9.  [📄 License](#-license)
 ---
 
 ## 1. The Solution: How It Solves Your Problems
@@ -278,7 +278,21 @@ flowchart TD
 *   
 ![SEVOsmith Keyword Orchestrator: Email notification on Error](screenshots/Email-Notify-on-Error.jpg)
 
-## 6. The Future: The Full SEVOsmith Vision
+## 6. Dive Deeper: Strategic Guides & Tutorials
+
+This workflow is a powerful tool, but true mastery comes from understanding the underlying strategies. The following articles on NextGrowth.ai provide in-depth guides and context to help you get the most out of your automation efforts.
+
+#### **The Ultimate Guide to n8n Keyword Research**
+> Want to understand the "why" behind this workflow? This comprehensive guide on NextGrowth.ai breaks down the entire process of building a custom keyword research engine with n8n, from core concepts to advanced techniques. It's the perfect companion piece to this repository.
+
+*   **[➤ Read the full guide on NextGrowth.ai](https://nextgrowth.ai/n8n-keyword-research-automation/)**
+
+#### **How to Self-Host n8n on Ubuntu with Docker**
+> To run complex automations at scale, a self-hosted n8n instance is the most powerful and cost-effective solution. This step-by-step tutorial walks you through setting up a production-ready n8n environment on a Linux server using Docker.
+
+*   **[➤ View the self-hosting tutorial](https://nextgrowth.ai/self-host-n8n-automation-ubuntu-docker/)**
+
+## 7. The Future: The Full SEVOsmith Vision
 
 The **Keyword Orchestrator** is the foundational "Discovery Engine" of a much larger vision: a fully autonomous, end-to-end content lifecycle engine built on n8n.
 
