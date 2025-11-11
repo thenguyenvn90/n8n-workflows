@@ -1,10 +1,12 @@
-# SEVOsmith Keyword Orchestrator
+# SEVOsmith Keyword Orchestrator: From Raw Data to Strategic Report - Fully Automated Keyword Research using n8n and DataForSEO
 
-> The Definitive Engine for Fully Automated Keyword Research using n8n and DataForSEO.
 
 Your keyword research process is broken. It's a chaotic scramble across a dozen different tools, a manual grind of merging messy CSVs, and a constant battle against brittle workflows that fail silently. This isn't strategy; it's a bottleneck that kills efficiency and drains your budget on redundant API calls.
 
 The **SEVOsmith Keyword Orchestrator** is the delivery on the promise of true automation. It's not a simple template; it's a production-grade system, engineered to execute a complete, multi-vector **n8n keyword research** strategy from start to finish.
+
+![SEVOsmith Keyword Orchestrator n8n Workflow](screenshots/SEVOsmith-Keyword-Orchestrator-workflkow-screenshot.jpg)
+> *A high-level view of the SEVOsmith Keyword Orchestrator workflow in n8n.*
 
 <br>
 
@@ -16,30 +18,37 @@ The **SEVOsmith Keyword Orchestrator** is the delivery on the promise of true au
 
 ---
 
-![SEVOsmith Keyword Orchestrator n8n Workflow](SEVOsmith-Keyword-Orchestrator-workflkow-screenshot.jpg)
-> *A high-level view of the SEVOsmith Keyword Orchestrator workflow in n8n.*
+## Table of Contents
 
-![SEVOsmith Google Sheet Manager Screenshot](SEVOsmith-Keyword-Orchestrator-Manager-Google-Sheet.jpg)
-> *Screenshot of the Google sheet manager*
+1.  [🤖 Key Features](#-key-features)
+2.  [📊 Live Demos](#-live-demos)
+3.  [⚙️ Workflow Architecture](#️-workflow-architecture)
+4.  [🚀 How It Works: The Six Modules](#-how-it-works-the-six-modules-of-automation)
+5.  [🛠️ Setup & User Guide](#️-setup--user-guide)
+6.  [💡 The Road Ahead: More Ideas & The SEVOsmith Vision](#-the-road-ahead-more-ideas--the-sevosmith-vision)
+7.  [❤️ Support the Project](#️-support-the-project)
+8.  [📄 License](#-license)
+
+---
 
 ## 🤖 Key Features
 
 This system is designed to turn the raw, disconnected data from **DataForSEO** into a cohesive, actionable intelligence report.
 
-🧠 **360-Degree Intelligence Gathering**
-The Orchestrator deploys nine parallel agents to query the entire search ecosystem using **DataForSEO**—from Google and YouTube SERPs to AI Overviews and search intent signals.
+#### 🧠 360-Degree Raw Data Gathering
+The Orchestrator deploys nine parallel agents to query the entire search ecosystem using **DataForSEO**—from Google and YouTube SERPs to AI Overviews and search intent signals. This is the "Raw Data" firehose, comprehensively collected.
 
-🎯 **Automated Synthesis Core**
-The system's code-based "brain" ingests the chaotic outputs from all APIs and programmatically unifies them into a single, clean, and structured data object. It's the alchemist that forges your "Strategic Report."
+#### 🎯 The Automated Synthesis Core
+This is where data becomes strategy. The system's code-based "brain" ingests the chaotic outputs from all APIs and programmatically unifies them into a single, clean, and structured data object. It's the alchemist that forges your "Strategic Report."
 
-🔍 **Production-Grade Resilience & Error Handling**
-Every API call is individually validated. Any failure is instantly caught, logged in your control sheet, and triggers an email notification—without halting the entire process.
+#### 🔍 Production-Grade Resilience & Error Handling
+A workflow that breaks on a single failed API call isn't "Fully Automated." Every API call is individually validated. Any failure is instantly caught, logged, and triggers an email notification—without halting the entire process.
 
-🔄 **Zero-Waste Caching Engine**
+#### 🔄 The Zero-Waste Caching Engine
 True automation is efficient. The integrated caching layer checks for existing research before every run, delivering instant results on repeat queries and saving you significant **DataForSEO** API costs.
 
-🌐 **Instant, Interactive Deliverables**
-The final "Strategic Report" is more than a data dump. It's a professional, self-contained HTML document with filterable tables, dynamic charts, and automated topic clustering.
+#### 🌐 Instant, Interactive Deliverables
+The final "Strategic Report" is more than a data dump. It's a professional, self-contained HTML document with filterable tables, dynamic charts, and automated topic clustering, ready for stakeholders or clients.
 
 ## 📊 Live Demos: See the Final Report
 
@@ -54,12 +63,63 @@ Talk is cheap. The real proof is in the final product. Click on the live demos b
 *   **Broad Topic Query:** `golden retriever`
     *   **[➤ View Live Report](https://pub-888f481be9bf4ba69f23d2e208e4a20b.r2.dev/article/golden-retriever__keyword_research.html)**
 
-## ⚙️ How It Works: The Six Modules of the Intelligence Engine
+## ⚙️ Workflow Architecture
 
-<details>
-<summary><strong>► Click to expand the full architectural breakdown</strong></summary>
+This diagram provides a high-level overview of the workflow's logic, including its caching and error-handling paths.
 
-![SEVOsmith Keyword Orchestrator workflow chart](SEVOsmith_Keyword_Orchestrator_Flow_Chart.png)
+```mermaid
+flowchart TD
+    subgraph mod1["Module 1: Initiation"]
+        A["▶️ Start: Trigger
+        (e.g., New Row in Google Sheet)"] --> B["⚙️ Get Seed Keyword & Settings"];
+    end
+
+    subgraph mod2["Module 2: Caching & Efficiency"]
+        B --> C{Cache Hit?};
+    end
+
+    %% --- Branching Logic from Module 2 ---
+    %% This is the Cache Hit Path, bypassing Modules 3 & 4
+    C -- Yes --> G; 
+    %% This is the Cache Miss Path, proceeding to Module 3
+    C -- No --> D;  
+
+    subgraph mod3["Module 3: Live Data Fetching"]
+        D["📡 Execute Parallel API Calls
+        (DataForSEO)"] --> D_Check{"API Calls Successful?"};
+    end
+    
+    subgraph mod6["Module 6: Failure Notification"]
+        D_Check -- No --> F_Start["❌ Log Error & Update Status to 'Error'"];
+        F_Start --> F_Notify["📧 Send Failure Notification Email"];
+        F_Notify --> F_End[🛑 Stop with Error];
+    end
+
+    subgraph mod4["Module 4: Synthesis (Success Path)"]
+        D_Check -- Yes --> E["🧠 Analyze & Structure Data
+        (Normalize & Compact)"];
+    end
+
+    subgraph mod5["Module 5: Output & Finalization (Success Path)"]
+        E --> J(➕ Create Cache Entry);
+        J --> G["📝 Generate Interactive Report
+        (HTML)"];
+        G --> H["📤 Deliver Report & Notify
+        (Upload to S3, G-drive, Send Email)"];
+        H --> I[✅ Update Status to 'Completed' & Finish];
+    end
+
+    %% Styling
+    style A fill:#D5E8D4,stroke:#82B366
+    style I fill:#D5E8D4,stroke:#82B366
+    style C fill:#FFE6CC,stroke:#D79B00
+    style D_Check fill:#FFE6CC,stroke:#D79B00
+    style F_Start fill:#F8CECC,stroke:#B85450
+    style F_Notify fill:#F8CECC,stroke:#B85450
+    style F_End fill:#F8CECC,stroke:#B85450
+```
+
+## 🚀 How It Works: The Six Modules of Automation
 
 1.  **Job Initiation & State Management:** A robust, stateful job queue using Google Sheets ensures every research task is processed reliably (`To_Do` -> `Processing` -> `Completed`).
 
@@ -73,30 +133,91 @@ Talk is cheap. The real proof is in the final product. Click on the live demos b
 
 6.  **Delivery, Caching & Finalization:** Handles the "last mile" tasks: uploading reports, sending a notification email, saving new data to the cache, and updating the job's status.
 
-</details>
+## 🛠️ Setup & User Guide
 
-## 🚀 Getting Started
-
-1.  **[Get the Workflow on Gumroad](<YOUR_GUMROAD_LINK_HERE>)**. Your download will include the workflow `.json` file and a comprehensive PDF setup guide.
-2.  Follow the PDF guide to set up your Google Drive environment and copy the required template files.
-3.  Import the workflow `.json` file into your n8n instance.
-4.  Connect your API credentials for **DataForSEO** and Google Services as instructed in the guide.
-5.  Activate the workflow and trigger your first run by adding a new job to your Google Sheet.
-
-## ⚡ Technical Requirements
-
-*   An **n8n** instance (self-hosted or cloud).
-*   API accounts for: **DataForSEO** and **Google Services** (Sheets, Drive, Gmail).
-*   (Optional) An S3-compatible account (like Cloudflare R2 or AWS S3).
-*   Basic familiarity with **n8n** and connecting API credentials.
+### Prerequisites:
+*   An active n8n instance.
+*   Credentials for: **DataForSEO**, **Google (OAuth2)**, **Gmail (OAuth2)**, and an **S3-compatible service** (like Cloudflare R2).
 
 ---
+### Part 1: Setup Checklist
+
+#### **Step 1: Environment & Asset Preparation**
+1.  **Import Workflow:** Import the `SEVOsmith_Keyword_Orchestrator_v1.1.json` file into your n8n instance.
+2.  **Create G-Drive Structure:**
+    *   `SEVOsmith` (Main Folder)
+        *   `KW_research_report` (Sub-folder)
+        *   `KW_research_raw_data` (Sub-folder)
+3.  **Copy Template Files:**
+    *   **Manager Sheet:** [Copy this template](https://docs.google.com/spreadsheets/d/1ssyXqC1JCJhjvrzwByoVf1QWLNZQ4P3K6HcJuhNOymM/edit?gid=484582664#gid=484582664), name it `SEVOsmith_Manager_Sheet`, and move it into your `SEVOsmith` folder.
+    *   **Raw Data Template:** [Copy this template](https://docs.google.com/spreadsheets/d/1CZsJ5Mh2cwh6i0WlDb3HaBk96_bBm71HLkBAZneYvYY/edit?gid=2108933567#gid=2108933567), name it `KW_Research_Template_Source`, and move it into your `KW_research_raw_data` folder.
+4.  **Create n8n Data Table:** In n8n, go to "Data tables" and create a table named `SEVOsmith_KW_Cache` with four `String` columns: `Project`, `session_id`, `cache_id`, `cache_content`.
+
+#### **Step 2: Configuration**
+1.  **Create n8n Credentials:** In n8n, create the necessary credentials: `HTTP Basic Auth` (for DataForSEO), `Google OAuth2`, `Gmail OAuth2`, and `AWS` (for S3/R2).
+2.  **Populate Settings Sheet:** Open your `SEVOsmith_Manager_Sheet`, go to the `KW_Reseach_Setting` tab, and populate the values.
+
+| Setting Name | Your Value |
+| :--- | :--- |
+| Location Code | `2840` |
+| Language Code | `en` |
+| Litmit | `50` |
+| Upload to G-drive | `Yes` |
+| Upload to Cloudflade R2 | `Yes` |
+| Save Raw Data | `Yes` |
+| Email Notify | `Yes` |
+| Email to receive report | `your.email@example.com` |
+| **Google Drive Folder id** | *<ID of your `KW_research_report` folder>* |
+| **Cloudflade R2 link** | *<Your public R2/S3 bucket URL>* |
+
+#### **Step 3: Connect, Save, and Activate**
+1.  **Assign Credentials** to all relevant nodes in the workflow.
+2.  **Connect Google Sheet IDs:**
+    *   Paste the ID of your `SEVOsmith_Manager_Sheet` into the `Document ID` field of all Google Sheets nodes.
+    *   Paste the ID of your `KW_Research_Template_Source` into the `File ID` field of the `Google Drive Copy KW Template` node.
+3.  **Connect Data Table:** Select your `SEVOsmith_KW_Cache` table in the `Get Cache` and `Create Cache` nodes.
+4.  **Save and Activate** the workflow.
+
+---
+### Part 2: Usage & Troubleshooting
+
+#### **Running a Job**
+*   To start a job, add a row to the `Campaign Start` tab, setting `Action` to `Submit` and `Status` to `To_Do`.
+*   The workflow will trigger, updating the status to `Processing` and finally `Completed` or `Error`.
+*   Check your email or the sheet for links to the deliverables.
+
+#### **Troubleshooting**
+*   **Workflow Doesn't Trigger:** Ensure `Action` and `Status` values are exact (case-sensitive).
+*   **Execution Fails:** Check the `Notes` column in the sheet and your email for a detailed error message.
+*   **File Upload Fails:** Confirm the Google Drive Folder ID is correct and your credential has write permissions.
+
+---
+### Part 3: Key Considerations & Best Practices
+
+*   **Critical: Google OAuth Scopes:** When creating your `Google OAuth2` credential, ensure you enable scopes for **both** Sheets (`.../auth/spreadsheets`) and Drive (`.../auth/drive`).
+*   **Understanding Caching:** The first run for a unique keyword is a "cache miss" and uses APIs. Subsequent runs are "cache hits" and are instant and free.
+*   **Managing API Costs:** The `Litmit` parameter in your settings sheet controls the depth of research and directly impacts your DataForSEO API costs.
+*   **Error Handling:** The workflow has a built-in error path that will catch API failures, update your sheet with a specific error, and send an alert email.
+
+## 💡 The Road Ahead: The Full SEVOsmith Vision
+
+The **Keyword Orchestrator** is the foundational "Discovery Engine" of a much larger vision: a fully autonomous, end-to-end content lifecycle engine built on n8n.
+
+The strategic intelligence gathered by the Orchestrator is the fuel for the entire SEVOsmith ecosystem. The upcoming modules will leverage this data to:
+
+1.  **Deepen Strategic Analysis:** Go beyond keywords with autonomous **Competitor, SEO, and Business Analysis** to identify the perfect winning angle for your content.
+2.  **Forge AI-Citable Content:** Execute **The Autonomous n8n System** that transforms the strategic blueprint into a final, publication-ready article, engineered to be cited by AI.
+3.  **Amplify Across Platforms:** Automatically **Create Multi-Platform Assets**, turning one article into a campaign of infographics, images, and social media posts to dominate every channel.
+4.  **Track Performance:** Close the loop with an automated system for **Tracking Website Rankings**, providing clear feedback on your content's real-world impact.
+
+By getting the Keyword Orchestrator today, you are securing the foundational component of this complete autonomous content ecosystem.
 
 ## ❤️ Support the Project
 
-If you find this workflow valuable, please consider supporting its ongoing development and the creation of more open-source templates. A coffee goes a long way!
+This workflow is offered for free, but if you find it valuable, please consider supporting its ongoing development. Your support helps create more open-source templates and tools for the community.
 
-<a href="https://buymeacoffee.com/nextgrowth">
+[![Get it on Gumroad](https://img.shields.io/badge/Support%20on-Gumroad-%23FF90E8?style=for-the-badge&logo=gumroad)](<YOUR_GUMROAD_LINK_HERE>)
+<a href="<YOUR_BUYMEACOFFEE_LINK_HERE>">
   <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
 </a>
 
