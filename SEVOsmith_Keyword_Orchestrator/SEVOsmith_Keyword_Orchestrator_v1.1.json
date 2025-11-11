@@ -3766,6 +3766,38 @@
         576
       ],
       "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# **1. Create Data Table names: SEVOsmith_KW_Cache table**\n\n* `Project` (string)\n* `session_id` (string)\n* `cache_id` (string)\n* `cache_content` (string)\n\n# **2.  Create G-Drive Structure:**\nCreate folder inside your google drive:\n    *   `SEVOsmith` (Main Folder)\n        *   `KW_research_report` (Sub-folder)\n        *   `KW_research_raw_data` (Sub-folder)\n3.  **Copy Template Files:**\n    *   **Manager Sheet:** [Copy this template](https://docs.google.com/spreadsheets/d/1ssyXqC1JCJhjvrzwByoVf1QWLNZQ4P3K6HcJuhNOymM/edit?gid=484582664#gid=484582664), name it `SEVOsmith_Manager_Sheet`, and move it into your `SEVOsmith` folder.\n    *   **Raw Data Template:** [Copy this template](https://docs.google.com/spreadsheets/d/1CZsJ5Mh2cwh6i0WlDb3HaBk96_bBm71HLkBAZneYvYY/edit?gid=2108933567#gid=2108933567), name it `KW_Research_Template_Source`, and move it into your `KW_research_raw_data` folder.\n\n# **3. Create n8n Credentials**\n1.  **Create n8n Credentials:** In n8n, create the necessary credentials: `HTTP Basic Auth` (for DataForSEO), `Google OAuth2`, `Gmail OAuth2`, and `AWS` (for S3/R2).\n2.  **Populate Settings Sheet:** Open your `SEVOsmith_Manager_Sheet`, go to the `KW_Reseach_Setting` tab, and populate the values.\n\n| Setting Name | Your Value |\n| :--- | :--- |\n| Location Code | `2840` |\n| Language Code | `en` |\n| Litmit | `50` |\n| Upload to G-drive | `Yes` |\n| Upload to Cloudflade R2 | `Yes` |\n| Save Raw Data | `Yes` |\n| Email Notify | `Yes` |\n| Email to receive report | `your.email@example.com` |\n| **Google Drive Folder id** | *<ID of your `KW_research_report` folder>* |\n| **Cloudflade R2 link** | *<Your public R2/S3 bucket URL>* |\n\n# **4. Connect, Save, and Activate**\n1.  **Assign Credentials** to all relevant nodes in the workflow.\n2.  **Connect Google Sheet IDs:**\n    *   Paste the ID of your `SEVOsmith_Manager_Sheet` into the `Document ID` field of all Google Sheets nodes.\n    *   Paste the ID of your `KW_Research_Template_Source` into the `File ID` field of the `Google Drive Copy KW Template` node.\n3.  **Connect Data Table:** Select your `SEVOsmith_KW_Cache` table in the `Get Cache` and `Create Cache` nodes.\n4.  **Save and Activate** the workflow.\n",
+        "height": 1200,
+        "width": 1056,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        8800,
+        1008
+      ],
+      "id": "fd54c68c-55e2-4a13-bd48-858f59b736ab",
+      "name": "Sticky Note28"
+    },
+    {
+      "parameters": {
+        "content": "# Setup Guide",
+        "height": 80,
+        "width": 1060,
+        "color": 2
+      },
+      "id": "20f3d130-1c7b-4f36-8200-6219271f52a9",
+      "name": "Sticky Note27",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        8800,
+        928
+      ],
+      "typeVersion": 1
     }
   ],
   "pinData": {},
@@ -4866,18 +4898,11 @@
     "availableInMCP": false,
     "errorWorkflow": "oxfDvlgwQE8SXHM4"
   },
-  "versionId": "6a38b9dd-9cbb-4e7f-9d3b-e448fe1aa28a",
+  "versionId": "f0a75019-80a3-4dd5-a8af-3e0684c41eae",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "11e9efcdcf8b81c33a6dc0fbb8a65585e44890419633abdd99da8b32fbffb48e"
   },
   "id": "oxfDvlgwQE8SXHM4",
-  "tags": [
-    {
-      "updatedAt": "2025-10-07T11:39:33.338Z",
-      "createdAt": "2025-10-07T11:39:33.338Z",
-      "id": "BJmTHBmUavg9jf0k",
-      "name": "TheNguyen"
-    }
-  ]
+  "tags": []
 }
