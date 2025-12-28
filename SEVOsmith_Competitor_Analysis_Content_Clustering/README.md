@@ -12,8 +12,11 @@ This workflow is the intelligence core of the SEVOsmith suite. It automates the 
 [![Get it on Gumroad](https://img.shields.io/badge/Get%20the%20Workflow-Gumroad-%23FF90E8?style=for-the-badge&logo=gumroad)](https://nextgrowth.gumroad.com/l/competitor-analysis-content-clustering-with-n8n-DataForSEO)
 
 > **Note:** This workflow is available as a FREE template on Gumroad. While completely free to download, optional tips are greatly appreciated and help support continued development and new features!
-
 <br>
+
+👉**Ready to turn your content strategy into published articles?**  
+
+Check out **[SEVOsmith: The Autonomous n8n System for AI-Citable Content](https://nextgrowth.ai/sevosmith-ai-citable-content-engine/)** to automate the entire production workflow—from research to publication.
 
 ## 🎯 1. User Input & Strategy Modes
 The workflow starts via a Form with three distinct operational modes to suit your specific goal:
