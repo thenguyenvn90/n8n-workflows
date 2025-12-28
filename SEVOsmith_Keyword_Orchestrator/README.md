@@ -17,8 +17,7 @@ It's not just another template; it's a production-grade system engineered to eli
 
 [![Get it on Gumroad](https://img.shields.io/badge/Get%20the%20Workflow-Gumroad-%23FF90E8?style=for-the-badge&logo=gumroad)](https://nextgrowth.gumroad.com/l/SEVOsmith-Automated-n8n-Keyword-Research)
 
-> **Note:** This workflow is offered on Gumroad to help support its continued development and to allow for optional tips. Your support is greatly appreciated!
-
+> **Note:** This workflow is available as a FREE template on Gumroad. While completely free to download, optional tips are greatly appreciated and help support continued development and new features!
 <br>
 
 ---
