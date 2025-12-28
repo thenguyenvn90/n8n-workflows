@@ -1,0 +1,2879 @@
+{
+  "name": "SEVOsmith_The_Strategy_Architect_v2.0.0",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "// --- Data Mappings ---\n// This object maps the country name from the form to the DataForSEO location_code.\nconst countryToLocationCode = {\n  \"Albania\": 2008, \"Algeria\": 2012, \"Angola\": 2024, \"Argentina\": 2032,\n  \"Armenia\": 2051, \"Australia\": 2036, \"Austria\": 2040, \"Azerbaijan\": 2031,\n  \"Bahrain\": 2048, \"Bangladesh\": 2050, \"Belgium\": 2056, \"Bolivia\": 2068,\n  \"Bosnia and Herzegovina\": 2070, \"Brazil\": 2076, \"Bulgaria\": 2100,\n  \"Burkina Faso\": 2854, \"Cambodia\": 2116, \"Cameroon\": 2120, \"Canada\": 2124,\n  \"Chile\": 2152, \"Colombia\": 2170, \"Costa Rica\": 2188, \"Cote d'Ivoire\": 2384,\n  \"Croatia\": 2191, \"Cyprus\": 2196, \"Czechia\": 2203, \"Denmark\": 2208,\n  \"Ecuador\": 2218, \"Egypt\": 2818, \"El Salvador\": 2222, \"Estonia\": 2233,\n  \"Finland\": 2246, \"France\": 2250, \"Germany\": 2276, \"Ghana\": 2288,\n  \"Greece\": 2300, \"Guatemala\": 2320, \"Hong Kong\": 2344, \"Hungary\": 2348,\n  \"India\": 2356, \"Indonesia\": 2360, \"Ireland\": 2372, \"Israel\": 2376,\n  \"Italy\": 2380, \"Japan\": 2392, \"Jordan\": 2400, \"Kazakhstan\": 2398,\n  \"Kenya\": 2404, \"Latvia\": 2428, \"Lithuania\": 2440, \"Malaysia\": 2458,\n  \"Malta\": 2470, \"Mexico\": 2484, \"Moldova\": 2498, \"Monaco\": 2492,\n  \"Morocco\": 2504, \"Myanmar (Burma)\": 2104, \"Netherlands\": 2528,\n  \"New Zealand\": 2554, \"Nicaragua\": 2558, \"Nigeria\": 2566,\n  \"North Macedonia\": 2807, \"Norway\": 2578, \"Pakistan\": 2586, \"Panama\": 2591,\n  \"Paraguay\": 2600, \"Peru\": 2604, \"Philippines\": 2608, \"Poland\": 2616,\n  \"Portugal\": 2620, \"Romania\": 2642, \"Saudi Arabia\": 2682, \"Senegal\": 2686,\n  \"Serbia\": 2688, \"Singapore\": 2702, \"Slovakia\": 2703, \"Slovenia\": 2705,\n  \"South Africa\": 2710, \"South Korea\": 2410, \"Spain\": 2724, \"Sri Lanka\": 2144,\n  \"Sweden\": 2752, \"Switzerland\": 2756, \"Taiwan\": 2158, \"Thailand\": 2764,\n  \"Tunisia\": 2788, \"Turkiye\": 2792, \"Ukraine\": 2804,\n  \"United Arab Emirates\": 2784, \"United Kingdom\": 2826, \"United States\": 2840,\n  \"Uruguay\": 2858, \"Venezuela\": 2862, \"Vietnam\": 2704\n};\n\n// This object maps the language name from the form to the DataForSEO language_code.\nconst languageToLanguageCode = {\n  \"Albanian\": \"sq\", \"Arabic\": \"ar\", \"Armenian\": \"hy\", \"Azeri\": \"az\",\n  \"Bengali\": \"bn\", \"Bosnian\": \"bs\", \"Bulgarian\": \"bg\",\n  \"Chinese (Simplified)\": \"zh-CN\", \"Chinese (Traditional)\": \"zh-TW\",\n  \"Croatian\": \"hr\", \"Czech\": \"cs\", \"Danish\": \"da\", \"Dutch\": \"nl\",\n  \"English\": \"en\", \"Estonian\": \"et\", \"Finnish\": \"fi\", \"French\": \"fr\",\n  \"German\": \"de\", \"Greek\": \"el\", \"Hebrew\": \"he\", \"Hindi\": \"hi\",\n  \"Hungarian\": \"hu\", \"Indonesian\": \"id\", \"Italian\": \"it\", \"Japanese\": \"ja\",\n  \"Korean\": \"ko\", \"Latvian\": \"lv\", \"Lithuanian\": \"lt\", \"Macedonian\": \"mk\",\n  \"Malay\": \"ms\", \"Norwegian (Bokmål)\": \"nb\", \"Polish\": \"pl\",\n  \"Portuguese\": \"pt\", \"Romanian\": \"ro\", \"Russian\": \"ru\", \"Serbian\": \"sr\",\n  \"Slovak\": \"sk\", \"Slovenian\": \"sl\", \"Spanish\": \"es\", \"Swedish\": \"sv\",\n  \"Tagalog\": \"tl\", \"Thai\": \"th\", \"Turkish\": \"tr\", \"Ukrainian\": \"uk\",\n  \"Urdu\": \"ur\", \"Vietnamese\": \"vi\"\n};\n\n// --- Main Logic ---\n// This loop goes through each item (form submission) sent to the node.\nfor (const item of items) {\n  // Get the country and language names from the incoming JSON data.\n  const countryName = item.json.Country;\n  const languageName = item.json.Language;\n\n  // Find the corresponding codes from the mapping objects.\n  // If a match isn't found, it will result in 'null'.\n  const locationCode = countryToLocationCode[countryName] ?? null;\n  const languageCode = languageToLanguageCode[languageName] ?? null;\n\n  // Add the new code fields to the JSON object.\n  item.json.location_code = locationCode;\n  item.json.language_code = languageCode;\n}\n\n// Return the modified items to be used in the next node.\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -800,
+        544
+      ],
+      "id": "4e3e7573-e7de-42a2-80c2-af2140bcc0d5",
+      "name": "Get Country & Language code"
+    },
+    {
+      "parameters": {
+        "content": "## User Input",
+        "height": 496,
+        "width": 1744
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        208
+      ],
+      "id": "b2b7355d-5481-429e-b2d3-d7655d82c0c6",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "##  Get Competitors and Ranked Keywords",
+        "height": 496,
+        "width": 1744,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        720
+      ],
+      "id": "356ec897-830d-4eee-bc2a-863abdbbf8eb",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/dataforseo_labs/google/serp_competitors/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"keywords\": {{ JSON.stringify($('Preparation').first().json.formatted_keywords) }},\n    \"location_code\": {{ $('Preparation').first().json.location_code }},\n    \"language_code\": \"{{ $('Preparation').first().json.language_code }}\",\n    \"sort_by\": [\"metrics.organic.count,desc\"],\n    \"limit\": 30,\n    \"filters\": [\n      [\"median_position\", \"<=\", 20],\n      \"and\",\n      [\"relevant_serp_items\", \">=\", 1],\n      \"and\",\n      [\"domain\", \"not_like\", \"%wikipedia%\"],\n      \"and\",\n      [\"domain\", \"not_like\", \"%linkedin%\"],\n      \"and\",\n      [\"domain\", \"not_like\", \"%facebook%\"],\n      \"and\",\n      [\"domain\", \"not_like\", \"%pinterest%\"],\n      \"and\",\n      [\"domain\", \"not_like\", \"%yelp%\"],\n      \"and\",\n      [\"domain\", \"not_like\", \"%reddit%\"]\n    ]\n  }\n]",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1312,
+        768
+      ],
+      "id": "e5c1cc15-2733-494b-90e2-febd7974a0ab",
+      "name": "SERP Competitors",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "ABmCxGcBagPhxsUA",
+          "name": "DataforSEO"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Preparation').item.json.Strategy_Mode }}",
+                    "rightValue": "Topic Explorer",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "f13069eb-ce19-4b54-a009-7e6f94a649d6"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "topic_explorer"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b6d39e15-6de7-4e43-8048-7cb0fb3b6ddb",
+                    "leftValue": "={{ $('Preparation').item.json.Strategy_Mode }}",
+                    "rightValue": "Manual Analysis",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Manual Analysis"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "2e1ebd4a-8953-412d-bde7-46c0b85a1d61",
+                    "leftValue": "={{ $('Preparation').item.json.Strategy_Mode }}",
+                    "rightValue": "Domain Defender",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "domain_defender"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1552,
+        896
+      ],
+      "id": "199c5963-e05d-419d-9216-083284b4e7a3",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/dataforseo_labs/google/relevant_pages/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"target\": \"{{ $json.Domain }}\",\n    \"location_code\": {{ $('Competitor Collector').first().json.location_code }},\n    \"language_code\": \"{{ $('Competitor Collector').first().json.language_code }}\",\n    \"limit\": {{ $('Preparation').first().json.Pages_Per_Competitor }},\n    \"sort_by\": [\n      \"metrics.organic.etv,desc\"\n    ],\n    \"filters\": [\n      [\n        \"metrics.organic.etv\",\n        \">\",\n        10\n      ],\n      \"and\",\n      [\n        \"metrics.organic.count\",\n        \">\",\n        1\n      ]\n    ]\n  }\n]",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -816,
+        976
+      ],
+      "id": "6d672fc7-24e5-414f-a08e-98d95d484ed3",
+      "name": "Get Competitor Top Pages",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "ABmCxGcBagPhxsUA",
+          "name": "DataforSEO"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\n\nfor (const item of $input.all()) {\n  const apiResponse = item.json;\n\n  // 1. Validate API Response Structure\n  if (\n    !apiResponse.tasks || \n    !apiResponse.tasks[0] || \n    !apiResponse.tasks[0].result || \n    !apiResponse.tasks[0].result[0]\n  ) {\n    continue;\n  }\n\n  const resultData = apiResponse.tasks[0].result[0];\n  const inputData = apiResponse.tasks[0].data; // Access original input (domain, location)\n\n  // 2. CHECK IF ITEMS EXIST (The Fix)\n  // If items is null or empty, skip this competitor\n  if (!resultData.items || resultData.items.length === 0) {\n    continue; \n  }\n\n  // 3. Map the pages\n  const cleanPages = resultData.items.map(page => ({\n    url: page.page_address, // DataForSEO uses 'page_address' here\n    title: \"Page Title\", // Relevant pages endpoint sometimes omits title, beware\n    estimated_traffic: page.metrics.organic.etv,\n    keyword_count: page.metrics.organic.count,\n    paid_cost: page.metrics.organic.estimated_paid_traffic_cost\n  }));\n\n  // 4. Build Output\n  results.push({\n    json: {\n      competitor_domain: inputData.target,\n      total_pages_found: resultData.items_count,\n      top_pages: cleanPages,\n      \n      // Pass context forward\n      location_code: inputData.location_code,\n      language_code: inputData.language_code\n    }\n  });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -576,
+        976
+      ],
+      "id": "d7c4a1f3-2dcb-44e0-9982-82cf1d19f643",
+      "name": "Structure Competitor Data"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/dataforseo_labs/google/ranked_keywords/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"target\": \"{{ $json.top_pages.url }}\",\n    \"location_code\": {{ $json.location_code }},\n    \"language_code\": \"{{ $json.language_code }}\",\n    \"limit\": {{ $('Preparation').first().json.Keywords_Per_Page || 50 }},\n    \"sort_by\": [\n      \"keyword_info.search_volume,desc\"\n    ],\n    \"filters\": [\n      [\n        \"ranked_serp_element.serp_item.rank_absolute\",\n        \"<=\",\n        30\n      ]\n    ]\n  }\n]",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        1040
+      ],
+      "id": "1c1984b1-6919-4130-bf66-78f59ac94c35",
+      "name": "Get Page Ranked Keywords",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "ABmCxGcBagPhxsUA",
+          "name": "DataforSEO"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\n\nfor (const item of $input.all()) {\n  const apiData = item.json;\n  \n  // 1. Safety Check: Ensure the API returned valid data\n  if (\n    !apiData.tasks || \n    !apiData.tasks[0] || \n    !apiData.tasks[0].result || \n    !apiData.tasks[0].result[0] ||\n    !apiData.tasks[0].result[0].items\n  ) {\n    continue;\n  }\n\n  // Access the original URL input\n  const inputData = apiData.tasks[0].data || {}; \n  const targetUrl = inputData.target || \"Unknown URL\";\n\n  // Regex fix for Competitor Name (Safe extraction)\n  let competitorName = \"Unknown\";\n  if (targetUrl !== \"Unknown URL\") {\n      competitorName = targetUrl.replace(/^(?:https?:\\/\\/)?(?:www\\.)?/i, \"\").split('/')[0];\n  }\n\n  const keywordsRaw = apiData.tasks[0].result[0].items;\n  \n  // 2. Extract, Filter & Map \"Winning Keywords\"\n  // We use .reduce() to filter out Navigational intent AND map the structure simultaneously\n  const winningKeywords = keywordsRaw.reduce((acc, k) => {\n    \n    // --- 🛑 FILTERING LOGIC ---\n    const intentInfo = k.keyword_data.search_intent_info || {};\n    const intentToCheck = (intentInfo.main_intent || \"unknown\").toLowerCase();\n    \n    // Skip if intent is purely navigational\n    if (intentToCheck === 'navigational') {\n        return acc;\n    }\n    // ---------------------------\n\n    // Safe Extraction Variables\n    const kData = k.keyword_data;\n    const kInfo = kData.keyword_info || {};\n    const kProps = kData.keyword_properties || {};\n    const trends = kInfo.search_volume_trend || {};\n    \n    // Ranking Data\n    const rankedElem = k.ranked_serp_element || {};\n    const serpItem = rankedElem.serp_item || {};\n    const rankChanges = serpItem.rank_changes || {};\n\n    // Push valid keyword object to accumulator\n    acc.push({\n      // Identity\n      keyword: kData.keyword,\n\n      // Market Metrics (The Potential)\n      market_data: {\n        search_volume: kInfo.search_volume || 0,\n        cpc: kInfo.cpc || 0,\n        keyword_difficulty: kProps.keyword_difficulty || 0,\n        competition_level: kInfo.competition_level || \"UNKNOWN\",\n        \n        // Detailed Financials\n        low_top_of_page_bid: kInfo.low_top_of_page_bid || 0,\n        high_top_of_page_bid: kInfo.high_top_of_page_bid || 0,\n        \n        // Trends\n        trend_monthly: trends.monthly || 0,\n        trend_quarterly: trends.quarterly || 0,\n        trend_yearly: trends.yearly || 0\n      },\n\n      // Performance (How this specific page ranks for this keyword)\n      performance: {\n        current_rank: serpItem.rank_absolute || null,\n        previous_rank: rankChanges.previous_rank_absolute || null,\n        rank_move: (rankChanges.previous_rank_absolute && serpItem.rank_absolute) \n                   ? rankChanges.previous_rank_absolute - serpItem.rank_absolute \n                   : 0,\n        is_new: rankChanges.is_new || false,\n        is_lost: rankedElem.is_lost || false,\n        etv: serpItem.etv || 0,\n        organic_value_usd: serpItem.estimated_paid_traffic_cost || 0\n      },\n\n      // Context\n      user_intent: intentInfo.main_intent || \"unknown\", // Keep original casing for display\n      last_updated: kInfo.last_updated_time\n    });\n\n    return acc;\n  }, []);\n\n  // 3. Page Level Aggregates\n  // IMPORTANT: These sums now ONLY include the filtered (non-navigational) keywords\n  const totalSearchVolume = winningKeywords.reduce((sum, k) => sum + k.market_data.search_volume, 0);\n  const totalTrafficValue = winningKeywords.reduce((sum, k) => sum + k.performance.organic_value_usd, 0);\n\n  // 4. Final Object Construction\n  results.push({\n    json: {\n      target_url: targetUrl,\n      competitor: competitorName,\n      \n      // High Level Page Metrics (Cleaned)\n      analysis: {\n        total_keywords_on_page_1: winningKeywords.length,\n        total_search_volume_potential: totalSearchVolume,\n        total_organic_value_usd: totalTrafficValue\n      },\n      \n      // The Detailed List\n      top_keywords: winningKeywords\n    }\n  });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1552,
+        1504
+      ],
+      "id": "ace488f1-9d33-4840-92e3-768a0a84e551",
+      "name": "Build Page Strategy"
+    },
+    {
+      "parameters": {
+        "jsCode": "// --- CONFIGURATION ---\nconst TEST_LIMIT = 0; // Set to 0 to process ALL items\n\nconst results = [];\nconst allItems = $input.all();\nconst itemsToProcess = (TEST_LIMIT > 0) ? allItems.slice(0, TEST_LIMIT) : allItems;\n\nfor (const item of itemsToProcess) {\n  const json = item.json;\n\n  // --- 1. DETERMINE DATA SOURCE ---\n  // Fix: Check if data is nested inside \"top_keywords\" (as per your input) or at the root\n  const source = json.top_keywords || json;\n\n  // --- 2. DEFENSIVE EXTRACTION ---\n  const market = source.market_data || {};\n  const perf = source.performance || {};\n  \n  // \"analysis\" stays at the root (Parent Data)\n  const analysis = json.analysis || {}; \n\n  // --- 3. MAPPING ---\n  results.push({\n    json: {\n      // --- Identity ---\n      \"Competitor\": json.competitor || \"Unknown\",\n      \"Target Page\": json.target_url || \"Unknown\",\n      \n      // Fix: Read keyword from 'source'\n      \"Keyword\": source.keyword || \"N/A\",\n      \n      // --- Market Metrics ---\n      \"Volume\": market.search_volume || 0,\n      \"CPC\": market.cpc || 0,\n      \"Difficulty\": market.keyword_difficulty || 0,\n      \"Top Bid\": market.high_top_of_page_bid || 0,\n      \"Yearly Trend\": market.trend_yearly || 0,\n      \n      // --- Performance ---\n      \"Competitor Rank\": perf.current_rank || \"Not Ranked\",\n      \"Rank Move\": perf.rank_move || 0,\n      \"Ranking Value ($)\": perf.organic_value_usd || 0,\n\n      // --- Context ---\n      \"Page Total Vol Potential\": analysis.total_search_volume_potential || 0,\n      \"Intent\": source.user_intent || \"unknown\",\n      \"Last Updated\": source.last_updated || \"\"\n    }\n  });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1200,
+        1312
+      ],
+      "id": "57ad2127-e9f6-43eb-9dbd-0ff45e42f23c",
+      "name": "Flattening Code"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1424,
+        1648
+      ],
+      "id": "b14476f0-91be-400e-bc22-63154278fce5",
+      "name": "Aggregate All Item Data"
+    },
+    {
+      "parameters": {
+        "batchSize": 50,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -928,
+        1312
+      ],
+      "id": "9f6a6ac1-c876-4c5a-a70c-72a5d9e90129",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -672,
+        1328
+      ],
+      "id": "769d22af-27f9-4517-918d-47270874ce3a",
+      "name": "Wait",
+      "webhookId": "e3e88469-227b-4f6c-8550-3a2189937c9d"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://md2doc.n8n.aemalsayer.com ",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "output",
+              "value": "={{ $json.content }}"
+            },
+            {
+              "name": "fileName",
+              "value": "={{ $json.filename }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -576,
+        1632
+      ],
+      "id": "4a03ebcf-9d1b-4247-951c-1307891320c9",
+      "name": "Create Doc",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "dbQ7EocGDNoLVqbW",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        1296
+      ],
+      "id": "a8e68175-6a17-43c2-ba29-f7a7d738b03b",
+      "name": "Drive Path Complete"
+    },
+    {
+      "parameters": {
+        "sendTo": "=thenguyen.ai.automation@gmail.com",
+        "subject": "=The content strategy is ready - {{ $('Wait for All').item.json.name }}",
+        "emailType": "text",
+        "message": "=Hi there,\n\nThe content plan is ready! 🎉 It's ready for your review.\nCheck it out! I hope you like it ^_^\n\nContent strategy: {{ $json.report_doc }}\n\nBest Regards,\nSEVOsmith Strategy Architect",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -1168,
+        2064
+      ],
+      "id": "2967c30e-4dbf-4492-98f4-d5e73058b8d6",
+      "name": "Send a message",
+      "webhookId": "e3ba93b6-e07b-408e-8552-181690fe3b9e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "7k1q2a9SLMZEECC6",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Plan for the articles (Pillars and Clusters)",
+        "height": 992,
+        "width": 1744,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        1232
+      ],
+      "id": "4766c70b-1641-4c5f-b19e-ab35c3bc56c4",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "# SEVOsmith - The Strategy Architect\n## Version 2.0.0\n",
+        "height": 128,
+        "width": 720,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3136,
+        80
+      ],
+      "id": "f868adfc-16f1-4bc5-880d-e0c5c6f08c94",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{\n`<INPUT_DATA>\n${JSON.stringify({\n  ...$json.data,\n  \"target_language\": $('Preparation').first().json.target_language ?? 'English'\n})}\n</INPUT_DATA>`\n}}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=# ----------------------------------------------------------------\n# SEVOsmith Strategy Architect v2.0.0\n# Component: Market Analysis & Content Strategy Generator\n# Multi-Language Support: ENABLED\n# Cannibalization Prevention: ENABLED\n# ----------------------------------------------------------------\n\n## CRITICAL DIRECTIVE: LANGUAGE HANDLING\n\n**Input Language Variable:**\nYou will receive `target_language` as an input variable (e.g., \"English\", \"Vietnamese\", \"Spanish\", \"Japanese\").\n\n**Language Output Rules:**\n1. **JSON Keys:** ALWAYS in English (e.g., `\"primary_keyword\"`, `\"pillar_title\"`, `\"strategic_overview\"`)\n2. **JSON Values:** ALWAYS in `target_language` (e.g., if Vietnamese: `\"primary_keyword\": \"tuổi thọ chó golden retriever\"`)\n3. **Markdown Report:** ALL content in `target_language` (headings, descriptions, recommendations, tables)\n4. **No Translation:** Do NOT translate input data. EXACT COPY keywords and data as provided.\n\n---\n\n# Role\nYou are an Elite SEO Strategist and Business Analyst for a high-end Digital Agency. Your expertise lies in Semantic SEO, Topical Authority, E-E-A-T optimization, and constructing \"Hub and Spoke\" (Pillar/Cluster) content models that dominate organic search through superior content quality and strategic internal linking.\n\n# Input Data\nYou will receive a JSON dataset containing:\n1. **target_language**: The language for all output content (e.g., \"Vietnamese\", \"Spanish\", \"English\")\n2. **Competitor Names** and their Domain Authority (if available)\n3. **Top Ranking Pages** (URLs with their current SERP positions)\n4. **Keywords** (with Search Volume, Keyword Difficulty, User Intent, and optionally CPC, Current Ranks, SERP Features)\n5. **Optional Context:** Industry vertical, target audience, geographic market, country\n\n# Your Objective\nAnalyze this raw market data to construct a **\"Market Domination Content Plan\"** with all strategic content written in `target_language`. You must organize scattered keywords into a logical site architecture (Pillars and Clusters) designed to:\n1. Outrank competitors by demonstrating superior topical authority\n2. Maximize content efficiency through strategic keyword clustering\n3. Capture buyers at every stage of their journey (Awareness → Consideration → Decision)\n4. Enable scalable content production\n5. **Prevent keyword cannibalization** through intelligent consolidation\n\n**CRITICAL:** All report text, pillar titles, cluster names, recommendations, and strategic insights MUST be written in `target_language`. Only JSON keys remain in English.\n\n---\n\n# Analysis Rules\n\n## 0. Language-Specific Content Standards\n\nBased on `target_language`, apply these content length and style guidelines:\n\n### English\n- **Pillar Pages:** 3,000-5,000 words\n- **Tier 1 Clusters:** 2,000-3,000 words\n- **Tier 2 Clusters:** 1,500-2,000 words\n- **Tone:** Professional but accessible\n- **EEAT:** Individual expertise, case studies, author bios\n\n### Vietnamese\n- **Pillar Pages:** 2,500-4,000 words\n- **Tier 1 Clusters:** 1,800-2,500 words\n- **Tier 2 Clusters:** 1,200-1,800 words\n- **Tone:** Direct and practical, respectful\n- **EEAT:** Government certifications, company credentials, formal qualifications\n\n### Spanish\n- **Pillar Pages:** 3,000-5,000 words\n- **Tier 1 Clusters:** 2,000-3,000 words\n- **Tier 2 Clusters:** 1,500-2,000 words\n- **Tone:** Warm and engaging, distinguish Spain vs LATAM if country specified\n- **EEAT:** Professional certifications, university affiliations\n\n### Japanese\n- **Pillar Pages:** 2,500-3,500 characters\n- **Tier 1 Clusters:** 1,800-2,500 characters\n- **Tier 2 Clusters:** 1,200-1,800 characters\n- **Tone:** Polite formal (です・ます form)\n- **EEAT:** Company authority over individual, institutional backing\n\n### Chinese (Simplified/Traditional)\n- **Pillar Pages:** 2,500-3,500 characters\n- **Tier 1 Clusters:** 1,800-2,500 characters\n- **Tier 2 Clusters:** 1,200-1,800 characters\n- **Tone:** Formal and authoritative\n- **EEAT:** Government compliance, company credentials\n\n### German\n- **Pillar Pages:** 3,500-5,500 words\n- **Tier 1 Clusters:** 2,500-3,500 words\n- **Tier 2 Clusters:** 1,800-2,500 words\n- **Tone:** Formal and technical\n- **EEAT:** Technical certifications, detailed credentials\n- **Note:** Capitalize all nouns\n\n### Korean\n- **Pillar Pages:** 2,500-3,500 characters (Hangul)\n- **Tier 1 Clusters:** 1,800-2,500 characters\n- **Tier 2 Clusters:** 1,200-1,800 characters\n- **Tone:** Respectful, honorific levels based on B2C vs B2B\n- **EEAT:** Company credentials, certifications\n\n### Arabic\n- **Pillar Pages:** 3,000-5,000 words\n- **Tier 1 Clusters:** 2,000-3,000 words\n- **Tier 2 Clusters:** 1,500-2,000 words\n- **Tone:** Formal and respectful\n- **EEAT:** Religious and cultural sensitivity, regional credentials\n- **Note:** Right-to-left layout considerations\n\n---\n\n## 1. Pillar Identification (WITH CANNIBALIZATION PREVENTION)\n\n### Step 1: Initial Keyword Grouping\n- Analyze the dataset to identify **natural, high-volume themes** that emerge from the keywords\n- Group keywords by semantic similarity (use contextual understanding, not just word matching)\n- Identify potential Pillar topics (broad themes with >1,000 combined monthly searches)\n\n### Step 2: Cannibalization Detection & Resolution\n\n**Before finalizing Pillars, check for conflicts:**\n\n#### Rule 1: Detect Synonyms (Merge into Single Article)\n```\nIF two keywords have:\n  - Semantic similarity > 85%\n  - Same search intent\n  - Similar volume ranges\n\nTHEN: MERGE into one article\n  - Primary keyword: Higher commercial value OR higher volume\n  - Secondary keyword: The other variant\n  \nEXAMPLE:\n  - \"golden retriever lifespan\" (18,100 vol)\n  - \"how long do golden retrievers live\" (18,100 vol)\n  → MERGE into single Pillar with both as primary + secondary\n```\n\n#### Rule 2: Detect Broad vs Specific (Pillar vs Cluster Hierarchy)\n```\nIF keyword A semantically contains keyword B:\n  - Broader topic = Pillar\n  - Specific topic = Cluster under that Pillar\n  \nEXAMPLE:\n  - \"golden retriever colors\" (broad) → Pillar\n  - \"reddish golden retriever\" (specific color) → Cluster under colors pillar\n```\n\n#### Rule 3: Detect High-Volume Clusters (Reverse Hierarchy)\n```\nIF cluster_volume > pillar_volume:\n  - KEEP hierarchy (broad = pillar, specific = cluster)\n  - FLAG cluster as \"HERO CLUSTER\"\n  - Add strategic note: \"Publish this cluster BEFORE pillar\"\n  - Pillar strategy: Brief overview linking to hero cluster\n  \nEXAMPLE:\n  - Pillar: \"golden retriever colors\" (8,100 vol)\n  - Cluster: \"reddish golden retriever\" (27,100 vol) → HERO CLUSTER\n  - Strategy: Publish C2.1 first, then P2 as linking hub\n```\n\n#### Rule 4: Consolidate Similar Intent (Merge Questions/Variations)\n```\nIF multiple keywords address same user problem:\n  - Different phrasing\n  - Same underlying concern\n  - Combined volume < 500 each\n\nTHEN: CONSOLIDATE into comprehensive article\n  - Use question format for primary (for featured snippets)\n  - Include all variations as secondary keywords\n  \nEXAMPLE:\n  - \"why do golden retrievers die so young\" (20 vol)\n  - \"golden retriever early death\" (10 vol)  \n  - \"golden retriever cancer rates\" (50 vol)\n  → MERGE into \"Why Do Golden Retrievers Die Young? Cancer & Genetics\"\n```\n\n### Step 3: Finalize Pillar Structure\n\nAfter cannibalization resolution, each Pillar should:\n- Target 500+ monthly searches (combined primary + related keywords)\n- Serve as a comprehensive \"Power Page\" (adjust length based on language standards)\n- Have commercial value (even if informational in nature)\n- Support at least 5 cluster articles (after consolidation)\n- Have NO semantic overlap >70% with other Pillars\n\n**Final Pillar Count:** Typically 3-7 pillars (after merging synonyms and consolidating)\n\n**Pillar Naming (in target_language):**\n- Title must be natural and compelling in `target_language`\n- Use search language from keyword data (EXACT COPY keyword phrasing)\n- Follow local naming conventions\n\n---\n\n## 2. Cluster Grouping (WITH CONSOLIDATION)\n\n### Step 1: Initial Cluster Identification\n- For each Pillar, identify potential cluster topics based on **semantic relevance and keyword data**\n- Each cluster should address a specific subtopic or user question\n\n### Step 2: Cluster Consolidation (Prevent Cannibalization)\n\n**Apply these rules BEFORE finalizing cluster list:**\n\n#### Consolidation Rule 1: Merge Overlapping Questions\n```\nIF 2+ keywords under same pillar have:\n  - Semantic similarity > 70%\n  - Same user intent\n  - Related but slightly different phrasing\n\nTHEN: Create ONE comprehensive cluster\n  - Title addresses both questions\n  - All keywords become secondary keywords\n  \nEXAMPLE (under Lifespan Pillar):\n  - \"male golden retriever lifespan\" (210 vol)\n  - \"female golden retriever lifespan\" (210 vol)\n  → MERGE into \"Male vs Female Golden Retriever Lifespan\"\n```\n\n#### Consolidation Rule 2: Comparative Articles\n```\nIF 2+ keywords compare similar options:\n  - \"X vs Y\" pattern\n  - Both options under same parent topic\n\nTHEN: Create comparison cluster\n  - Title: \"X vs Y: Complete Comparison\"\n  - Covers both comprehensively\n  \nEXAMPLE:\n  - \"yellow lab vs golden retriever\" (1,600 vol)\n  - \"golden retriever vs labrador\" (overlap)\n  → Single comparison cluster\n```\n\n### Step 3: Cluster Priority Scoring (After Consolidation)\n\nAssign priority to remaining clusters:\n\n- **Tier 1 (Launch First):** \n  - High Volume (>200) + Low-Medium KD (<35) + Commercial Intent\n  - OR: Hero Clusters (volume > parent pillar)\n  \n- **Tier 2 (Month 2-3):** \n  - Medium Volume (100-200) + Any KD + Strong Commercial Intent\n  \n- **Tier 3 (Authority Building):** \n  - Educational/Informational content that establishes expertise\n  - Lower volume (<100) but strategic value\n\n### Step 4: Final Cluster Structure\n\nAfter consolidation, each Pillar should have:\n- **5-15 clusters** (quality over quantity)\n- No two clusters targeting same primary keyword\n- Clear differentiation between cluster topics\n- Strategic internal linking opportunities\n\n**Cluster Naming (in target_language):**\n- Titles must be in `target_language`\n- Use natural search language (EXACT COPY from keyword data)\n- Preserve all language-specific characters (Vietnamese tone marks, Spanish accents, etc.)\n\n---\n\n## 3. Cannibalization Prevention (Final Validation)\n\n### Final Cross-Check (Before Output)\n\n**Validate entire content structure:**\n\n1. **No Duplicate Primary Keywords:**\n   - Check all articles (Pillars + Clusters)\n   - No two articles share the same primary keyword\n   - If found: Apply consolidation rules above\n\n2. **Semantic Overlap Check:**\n   - For any two articles with >70% semantic similarity:\n     - Verify they target different search intents\n     - OR: Verify one is overview (Pillar), one is deep-dive (Cluster)\n     - If neither: FLAG for consolidation\n\n3. **Parent-Child Relationship Validation:**\n   - Each Cluster must be semantically contained by its Pillar\n   - Pillar must be broader than all its Clusters\n   - If Cluster is broader: Restructure or promote to Pillar\n\n### Output Cannibalization Warnings\n\nIf any potential conflicts remain after consolidation:\n\n```markdown\n## ⚠️ Keyword Overlap Warnings\n\n[List any remaining risks with resolution strategies]\n```\n\n**Include in output ONLY if conflicts detected.**\n\n---\n\n## 4. Intent-Based Content Mapping\n\n| User Intent | Content Type | Page Goal | CTA Strategy (adapt to target_language) |\n|-------------|--------------|-----------|--------------|\n| **Commercial (C)** | Service/Landing Page | Lead Generation | Contact/Quote/Demo |\n| **Informational (I)** | Educational Guide | Authority + Email Capture | Download/Subscribe |\n| **Navigational (N)** | About/Case Study | Trust Building | Portfolio/Team |\n| **Transactional (T)** | Pricing/Comparison | Conversion | Purchase/Sign Up |\n\n---\n\n## 5. Competitive Differentiation (\"Killer Angle\")\n\nFor **every** Pillar and high-priority Cluster, analyze the top-ranking competitors and identify (write analysis in `target_language`):\n\n- **Content Gaps:** What are they missing?\n- **Format Opportunities:** How can we present it better?\n- **Depth Advantage:** Where can we go deeper?\n- **E-E-A-T Signals:** How can we demonstrate superior expertise? (use language-specific credibility markers)\n\n**Use competitor data to inform Content Structure recommendations** (see Output Format below).\n\n---\n\n## 6. Content Enhancement Flags\n\nMark articles that would benefit from:\n- **[VISUAL-HEAVY]:** Requires strategic image/diagram placement\n- **[DATA-DRIVEN]:** Needs statistics, charts, or tables\n- **[COMPARISON]:** Side-by-side comparison tables\n- **[INTERACTIVE]:** Calculator or interactive element opportunity\n- **[CASE-STUDY]:** Real example/case study needed\n- **[FAQ-RICH]:** Add FAQ schema for featured snippets\n- **[LOCAL-FOCUS]:** Requires location-specific data/examples\n- **[CULTURAL-ADAPT]:** Requires cultural localization\n- **[HERO-CLUSTER]:** High-volume cluster that should be published before its pillar\n\n---\n\n## 7. Internal Linking Architecture\n\n- Each Cluster must link TO its parent Pillar (with contextual anchor text in `target_language`)\n- Each Pillar must link TO all its Clusters (in a \"Related Topics\" section)\n- Identify \"Bridge Articles\" that connect multiple Pillars\n- **Hero Clusters:** Pillar should link prominently to hero clusters, mentioning their depth\n\n---\n\n## 8. SERP Feature Opportunities (Conditional)\n\n**IMPORTANT:** Only include this section in output if SERP feature data is explicitly provided in the input dataset.\n\n**IF `serp_features` data EXISTS in input:**\n- Identify which keywords currently trigger Featured Snippets, People Also Ask, Local Pack, Knowledge Panel, etc.\n- Note the current snippet holder/format for each\n- Recommend content structure to compete for these positions (recommendations in `target_language`)\n- Prioritize keywords where SERP features appear (higher CTR opportunity)\n\n**IF `serp_features` data is MISSING:**\n- **Do NOT create this section in the markdown output**\n- **Do NOT mention SERP features**\n- Focus analysis on available metrics (volume, difficulty, intent)\n\n---\n\n# Output Format (Markdown Report in target_language)\n\n**CRITICAL OUTPUT RULES:**\n1. **Section Headings:** In `target_language`\n2. **All Descriptions:** In `target_language`\n3. **All Strategic Text:** In `target_language`\n4. **All Recommendations:** In `target_language`\n5. **Table Content:** In `target_language`\n\n**Markdown = STRATEGY (Why we're doing things)**\n**JSON = EXECUTION (What to create)**\n\n---\n\n## 📊 Executive Summary\n\n*(All text in target_language - 3-5 paragraphs max)*\n\n* **Total Addressable Market Volume:** [Sum of all keyword volumes]\n* **Weighted Opportunity Score:** [Sum of (Volume × (100-KD) for commercial keywords)]\n* **Primary Competitor:** [Name + Domain Authority if available]\n* **Their Primary Weakness:** [Specific content gap - in target_language, 2-3 sentences]\n* **Our Biggest Opportunity:** [Strategic insight - in target_language, 2-3 sentences]\n* **Recommended Content Velocity:** [X articles/month for Y months - in target_language]\n* **Estimated Traffic Potential:** [Conservative projection - in target_language]\n\n---\n\n## 🎯 Publishing Priority & Timeline\n\n*(Show which Pillar each article belongs to - in target_language)*\n\n### Month 1: Foundation (Quick Wins)\n\n**Pillar 1:** [Title in target_language]\n  - ⭐⭐⭐⭐⭐ [HERO] C1.1: [Title] (27K vol, KD 0) - Week 1\n  - ⭐⭐⭐⭐⭐ P1: [Title] (18K vol, KD 4) - Week 2\n  - ⭐⭐⭐⭐ C1.2: [Title] (8K vol, KD 2) - Week 3\n\n**Pillar 2:** [Title in target_language]\n  - ⭐⭐⭐⭐⭐ C2.1: [Title] (14K vol, KD 1) - Week 4\n\n**Total Month 1:** 4 articles, 67K combined volume\n\n### Month 2: Expansion\n\n**Pillar 1:** [Continue clusters]\n**Pillar 3:** [New pillar + clusters]\n\n**Total Month 2:** [X articles, Y volume]\n\n### Month 3-6: Complete Coverage\n\n[High-level summary by month in target_language]\n\n---\n\n## 🏛️ Pillar Strategies\n\n### Pillar 1: [Title in target_language]\n\n**Why This Pillar Matters:** \n[2-3 sentences in target_language explaining strategic importance]\n\n**How We Beat Competitors:**\n[2-3 sentences in target_language explaining our competitive advantage]\n\n**Content Structure (Based on Competitor Analysis):**\n\n**Sections Competitors Cover:** (baseline to match)\n1. [Section from competitor analysis - in target_language]\n2. [Section from competitor analysis - in target_language]\n3. [Section from competitor analysis - in target_language]\n\n**Our Unique Sections:** (differentiation)\n1. [Gap we identified - in target_language] - Target: [keywords]\n2. [Gap we identified - in target_language] - Target: [keywords]\n\n**Estimated Length:** [X words/characters based on target_language]\n\n**Supporting Clusters:** [See detailed list in JSON output]\n\n**Key Clusters Highlighted:**\n- **C1.1 [HERO CLUSTER]:** [Title] - 27K volume (3x pillar volume!)\n  - Publish FIRST (Week 1)\n  - Strategy: [1 sentence in target_language]\n- **C1.2:** [Title] - 8K volume\n  - Publish Week 3\n  - Strategy: [1 sentence in target_language]\n\n**Internal Linking Strategy:**\n- P1 links to: All clusters (C1.1-C1.X)\n- Clusters link back to: P1\n- Bridge to: Pillar 2 via [topic connection]\n\n---\n\n### Pillar 2: [Title in target_language]\n\n[Repeat same structure as Pillar 1]\n\n---\n\n[Continue for all Pillars]\n\n---\n\n## 🔍 Competitive Intelligence\n\n*(All text in target_language)*\n\n### Their Strengths (We Must Match These)\n\n1. **[Strength Category in target_language]:** [Description in target_language, 1-2 sentences]\n2. **[Strength Category in target_language]:** [Description in target_language, 1-2 sentences]\n3. **[Strength Category in target_language]:** [Description in target_language, 1-2 sentences]\n\n### Their Weaknesses (We Will Exploit These)\n\n1. **[Weakness Category in target_language]:** [Opportunity in target_language, 2-3 sentences]\n   - **Our Approach:** [How we'll capitalize - in target_language]\n\n2. **[Weakness Category in target_language]:** [Opportunity in target_language]\n   - **Our Approach:** [How we'll capitalize - in target_language]\n\n3. **[Weakness Category in target_language]:** [Opportunity in target_language]\n   - **Our Approach:** [How we'll capitalize - in target_language]\n\n### Content Gaps (Our Strategic Opportunities)\n\n1. **[Gap Category in target_language]:** [Specific gap in target_language]\n   - **Target Articles:** [P1, C2.3]\n   - **Differentiation:** [How we'll stand out - in target_language]\n\n2. **[Gap Category in target_language]:** [Specific gap in target_language]\n   - **Target Articles:** [C1.2, C3.1]\n   - **Differentiation:** [How we'll stand out - in target_language]\n\n---\n\n## ⚠️ Content Architecture Notes\n\n*(ONLY include this section if applicable)*\n\n### Hero Clusters (Reverse Hierarchy)\n\n**[ONLY show if hero clusters exist]**\n\n**C2.1: [Title in target_language]** (27,100 vol)\n- **Parent Pillar:** P2 (8,100 vol) - 3x volume difference\n- **Publishing Strategy:** \n  - ✅ Publish C2.1 FIRST (Week 1) - Capture high-volume traffic immediately\n  - ✅ Publish P2 SECOND (Week 3) - Acts as hub linking to C2.1\n- **Content Differentiation:**\n  - **P2 (Pillar):** Brief overview of all colors (300-500 words per color), links extensively to clusters\n  - **C2.1 (Hero Cluster):** Deep dive on red variety (3,000+ words) - breeders, genetics, pricing, care\n- **SEO Strategy:**\n  - P2: Do NOT optimize for \"red\" or \"reddish\" keywords (leave for C2.1)\n  - P2: Optimize for \"colors\", \"shades\", \"spectrum\", \"variations\"\n  - C2.1: Own all \"red\", \"reddish\", \"dark red\" keywords\n\n### Consolidated Articles (Cannibalization Prevention)\n\n**[ONLY show if consolidations occurred]**\n\n**C1.1: [Consolidated Title in target_language]**\n- **Merged Keywords:**\n  - \"[keyword 1 - EXACT COPY]\" ([X] vol)\n  - \"[keyword 2 - EXACT COPY]\" ([Y] vol)\n  - \"[keyword 3 - EXACT COPY]\" ([Z] vol)\n- **Why Consolidated:** [Reason in target_language - same intent, semantic overlap, etc.]\n- **Content Approach:** [Strategy in target_language - comparison format, comprehensive guide, etc.]\n- **SEO Strategy:** [Which keyword is primary, which are secondary - in target_language]\n\n**C3.2: [Consolidated Title in target_language]**\n- **Merged Keywords:** [...]\n- **Why Consolidated:** [...]\n- **Content Approach:** [...]\n\n### Keyword Overlap Warnings\n\n**[ONLY show if unresolved conflicts remain]**\n\n1. **\"[keyword A]\" vs \"[keyword B]\"**\n   - **Overlap Risk:** [High/Medium/Low]\n   - **Why Keeping Both:** [Justification in target_language]\n   - **Differentiation Strategy:** [How they'll target different intents - in target_language]\n   - **Action Required:** [Manual review, specific optimization notes]\n\n---\n\n## 🌉 Bridge Content Strategy\n\n*(All text in target_language)*\n\n**[ONLY include if bridge opportunities exist]**\n\n1. **\"[Bridge Article Title in target_language]\"**\n   - **Connects:** Pillar [X] ↔ Pillar [Y]\n   - **Target Keyword:** [Keyword - EXACT COPY] (Vol: [X])\n   - **Strategic Value:** [Why this strengthens site authority - in target_language, 2-3 sentences]\n   - **Internal Links:** Links to both [Pillar X] + [Pillar Y] + [Cluster X.Y, Cluster Y.Z]\n   - **Publishing Timeline:** Month [X]\n\n2. **\"[Bridge Article Title in target_language]\"**\n   [Repeat structure]\n\n---\n\n## 📊 Content Production Budget\n\n*(All text in target_language)*\n\n| Article | Type | Word/Char Count | Est. Hours | Priority | Target Week |\n|---------|------|-----------------|------------|----------|-------------|\n| P1: [Title] | Pillar | 3,500 words | 12-15 hrs | High | Week 2 |\n| C1.1: [Title] [HERO] | Cluster | 3,000 words | 10-12 hrs | High | Week 1 |\n| C1.2: [Title] | Cluster | 2,500 words | 8-10 hrs | High | Week 3 |\n| C1.3: [Title] | Cluster | 2,000 words | 6-8 hrs | Medium | Week 4 |\n| **Month 1 Total** | - | **11,000 words** | **36-45 hrs** | - | - |\n\n**Resource Requirements:**\n- **Writers Needed:** [X] (to complete in 1 month)\n- **Estimated Cost:** [in target_language - if pricing data available]\n\n---\n\n## 💡 Advanced SEO Tactics\n\n*(All text in target_language)*\n\n### Schema Markup Priorities\n\n1. **FAQ Schema:** [List specific articles where FAQ schema is critical - in target_language]\n2. **HowTo Schema:** [List tutorial/guide articles - in target_language]\n3. **Article Schema:** All blog posts\n4. **Comparison Schema:** [List comparison articles - in target_language]\n\n### Featured Snippet Opportunities\n\n**[ONLY include if SERP feature data was provided in input]**\n\n- **[Keyword - EXACT COPY]** - Current format: [Definition/List/Table]\n  - **Current Holder:** [URL]\n  - **Our Strategy:** [How to structure content to win - in target_language]\n\n- **[Keyword - EXACT COPY]** - Current format: [Steps/How-to]\n  - **Current Holder:** [URL]\n  - **Our Strategy:** [How to structure content to win - in target_language]\n\n---\n\n## 🎬 Final Strategic Recommendation\n\n*(1-2 paragraphs in target_language)*\n\n**Priority Action:**\n[The single most important strategic insight and immediate next steps - in target_language]\n\n**Expected Outcome (6-Month Projection):**\n[Concrete prediction if recommendation followed: traffic gains, ranking improvements, timeline - in target_language]\n\n---\n\n## 📤 Output Delivery Instructions\n\nAfter completing the above Content Strategy Document (all in `target_language`), you must provide a second output containing the Article Production List.\n\n**Step 1:** Insert this exact separator line:\n```\n---ARTICLE_LIST_JSON---\n```\n\n**Step 2:** Immediately after the separator, provide the Article Production List as raw JSON with the following requirements:\n\n**Critical JSON Requirements:**\n- **JSON Keys:** ALWAYS in English\n- **JSON Values:** ALWAYS in `target_language`\n- Do NOT wrap the JSON in markdown code fences (no ```json)\n- Do NOT include any explanatory text before or after the JSON\n- Output pure, valid JSON only\n- The JSON must be directly parseable\n\n**JSON Structure:**\n```json\n{\n  \"project_metadata\": {\n    \"project_name\": \"string in target_language\",\n    \"target_market\": \"string in target_language\",\n    \"total_articles\": number,\n    \"target_language\": \"English|Vietnamese|Spanish|etc.\"\n  },\n  \"content_architecture\": {\n    \"pillars\": [\n      {\n        \"pillar_id\": \"P1\",\n        \"pillar_title\": \"string in target_language\",\n        \"cluster_count\": number,\n        \"cluster_ids\": [\"C1.1\", \"C1.2\", ...]\n      }\n    ]\n  },\n  \"articles\": [\n    {\n      \"article_id\": \"P1\",\n      \"article_type\": \"pillar\",\n      \"parent_pillar\": null,\n      \"priority\": \"high|medium|low\",\n      \"content_flags\": [\"[HERO-CLUSTER]\", \"[VISUAL-HEAVY]\", \"[FAQ-RICH]\"],\n      \"seo_data\": {\n        \"primary_keyword\": \"exact keyword string in target_language - EXACT COPY from input\",\n        \"primary_keyword_volume\": number,\n        \"secondary_keywords\": [\n          {\"keyword\": \"string in target_language - EXACT COPY\", \"volume\": number}\n        ]\n      },\n      \"article_purpose\": \"1-2 sentences in target_language explaining strategic value\",\n      \"cannibalization_notes\": {\n        \"consolidated_keywords\": [\n          {\"keyword\": \"merged keyword 1\", \"volume\": number},\n          {\"keyword\": \"merged keyword 2\", \"volume\": number}\n        ],\n        \"consolidation_reason\": \"string in target_language explaining why merged\",\n        \"related_to\": \"P2 or C2.1 (if hero cluster or special relationship)\",\n        \"relationship_type\": \"hero-cluster|sub-pillar|bridge|standard\",\n        \"differentiation_strategy\": \"string in target_language explaining how to prevent overlap\"\n      }\n    }\n  ]\n}\n```\n\n**Note on cannibalization_notes:**\n- Only include this object if the article:\n  - Has consolidated multiple keywords, OR\n  - Is a hero cluster (volume > parent pillar), OR\n  - Has special relationship requiring differentiation strategy\n- If none of the above apply, omit `cannibalization_notes` entirely\n\n**Article List Instructions:**\n- Include ALL articles from your analysis (Pillars, Clusters, Bridge articles)\n- Mark hero clusters with `[HERO-CLUSTER]` in content_flags\n- Include cannibalization_notes ONLY for consolidated or special-relationship articles\n- Ensure all article_ids referenced in cluster_ids arrays actually exist\n- Maintain consistent ID format (P1, P2, C1.1, C1.2, C2.1, etc.)\n- article_purpose must be in `target_language`\n- All keyword strings must be EXACT COPY from input (no translation)\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -1264,
+        1648
+      ],
+      "id": "7d3bb6ed-f812-4cd7-adc1-edb4aec7d688",
+      "name": "Master Strategist"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.type }}",
+                    "rightValue": "markdown",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "e972ca68-294b-4c3d-a146-34594af610dd"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "markdown"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b9cd1c1c-6c57-4350-8980-872c77cb6c73",
+                    "leftValue": "={{ $json.type }}",
+                    "rightValue": "articles",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "articles"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -784,
+        1648
+      ],
+      "id": "d06bd2cf-99c5-496f-bb2f-7cc5f693ddd8",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.documentId }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1OF6uJct9DcvTMNeaDNjFuHvptb7PIQEu",
+          "mode": "list",
+          "cachedResultName": "SEO_Agency",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1OF6uJct9DcvTMNeaDNjFuHvptb7PIQEu"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -384,
+        1632
+      ],
+      "id": "905ed742-0ada-447e-a312-a8ffdb10f2a0",
+      "name": "Move file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "sldlKM4CMS0lIS4K",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE",
+          "mode": "list",
+          "cachedResultName": "SEVOsmith_Content_Planner_Shared",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1303218187,
+          "mode": "list",
+          "cachedResultName": "Raw_Competitor_Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j2vDxyauID9FI9Azm4Onn9-rym2FPRL3ZnsUhZB2CQg/edit#gid=1303218187"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "Session ID": "={{ $json.session_id }}"
+          },
+          "matchingColumns": [
+            "Session ID"
+          ],
+          "schema": [
+            {
+              "id": "Project",
+              "displayName": "Project",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Session ID",
+              "displayName": "Session ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Main Execution ID",
+              "displayName": "Main Execution ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Keyword",
+              "displayName": "Keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Word Count",
+              "displayName": "Word Count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Content Format",
+              "displayName": "Content Format",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Target audience knowledge level",
+              "displayName": "Target audience knowledge level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Action",
+              "displayName": "Action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "KW Research",
+              "displayName": "KW Research",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Competitor Analyst",
+              "displayName": "Competitor Analyst",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Content & SEvO Strategist",
+              "displayName": "Content & SEvO Strategist",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "EEAT Curation",
+              "displayName": "EEAT Curation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Internal Linking",
+              "displayName": "Internal Linking",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Outline Architect",
+              "displayName": "Outline Architect",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Content Writer",
+              "displayName": "Content Writer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Article Reviser",
+              "displayName": "Article Reviser",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Report Generation",
+              "displayName": "Report Generation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Metadata Generation",
+              "displayName": "Metadata Generation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Draft Post",
+              "displayName": "Draft Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -448,
+        1328
+      ],
+      "id": "b31185f4-0a17-4d18-aae3-30b0919fda01",
+      "name": "Update Keyword List",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "auYpM9otybGTlYsx",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "af792dfd-6877-4d96-8808-816b2119b32c",
+              "name": "report_doc",
+              "value": "={{ $('Update Report Link').item.json.Report }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1408,
+        2064
+      ],
+      "id": "271d22c8-7995-4ecf-9402-1a3268bb41eb",
+      "name": "Get Link"
+    },
+    {
+      "parameters": {
+        "content": "# 🛠️ SEVOsmith - The Strategy Architect\n## Competitor Analysis & Content Clustering with n8n and DataForSEO\n\n## 📋 Overview\nThis workflow is the intelligence core of the SEVOsmith suite. It automates the end-to-end process of **Competitor Analysis**—identifying market leaders and dissecting their traffic sources—to generate a cohesive **Pillar and Cluster Content Strategy**. By transforming raw SERP data into a structured roadmap, it allows agencies to move from \"Research\" to \"Execution\" in minutes.\n\n---\n\n## 🎯 1. User Input & Strategy Modes\nThe workflow starts via a Form with three distinct operational modes to suit your specific goal:\n\n### 🔭 Mode A: Topic Explorer (Market Research)\n*   **Input:** Seed Keywords (e.g., \"AI CRM\", \"Vegan Leather\").\n*   **Goal:** \"I want to enter a niche but don't know who the players are.\"\n*   **Logic:** Auto-discovers the top 100 organic competitors via DataForSEO, filters out directories (Yelp, Clutch), and isolates the true market leaders.\n\n### 🛡️ Mode B: Domain Defender (Gap Analysis)\n*   **Input:** Your Website URL.\n*   **Goal:** \"Who is stealing my traffic?\"\n*   **Logic:** Identifies direct rivals who rank for the same keywords you do, allowing you to close content gaps.\n\n### 🎯 Mode C: Manual Analysis (The Sniper)\n*   **Input:** Specific Competitor Domains (comma-separated).\n*   **Goal:** \"I want to reverse-engineer `competitor-x.com` specifically.\"\n*   **Logic:** Bypasses discovery APIs to perform a surgical audit on the exact domains you provide.\n\n---\n\n## ✨ Key Features\n*   **⚡ The \"Competitor Collector\":** A smart aggregation engine that merges API discovery with manual inputs, removes duplicates, filters out non-business giants (Wikipedia, LinkedIn), and prioritizes the most relevant threats.\n*   **💎 \"Money Page\" Forensics:** Instead of crawling entire sites, the system identifies the specific URLs driving the highest **Estimated Traffic Value (ETV)** and extracts their winning keywords (Page 1 rankings only).\n*   **🧠 Semantic Strategy Engine:** An AI Agent acts as a Senior SEO Strategist, organizing scattered keywords into a logical **Pillar & Cluster Architecture** to build topical authority.\n*   **🛡️ Smart Data Upsert:** When saving to Google Sheets, the workflow intelligently merges new data with old data—ensuring you never overwrite rich historical metrics with empty data from a quick manual run.\n*   **📂 Dual-Stream Output:** Simultaneously generates a **Strategic Strategy Document** (MS Word) for stakeholders and an **Actionable Content Database** (Google Sheets) for production teams.\n\n---\n\n## ⚙️ How It Works\n\n### 1. The Extraction Loop\nFor every identified competitor (from any Strategy Mode), the system executes a recursive analysis cycle:\n1.  **Fetch Top Pages:** Retrieves the top 5-10 pages sorted by traffic value.\n2.  **Extract Winning Keywords:** Pulls the top 50 keywords ranking on Page 1 for those specific URLs.\n3.  **Intent Filtering:** Automatically discards \"Navigational\" (Branded) keywords to focus purely on Commercial and Informational opportunities.\n\n### 2. Strategic Synthesis (The AI Agent)\nThe cleaned market data is aggregated and sent to a **Master Strategist AI**. The AI analyzes content gaps and outputs:\n*   **Market Opportunity Score:** Total addressable volume and difficulty.\n*   **Content Architecture:** 3-5 Core Pillars and supporting Cluster articles.\n*   **Quick Wins:** A list of High Volume / Low Difficulty keywords to target immediately.\n\n### 3. Production & Delivery\nThe workflow splits the AI's output into two parallel workstreams:\n*   **Stream A (The Document):** Converts the Markdown strategy into a formatted HTML/Word document, names it dynamically (e.g., `Strategy__Client-Name__Date.docx`), and saves it to a designated **Google Drive Folder**.\n*   **Stream B (The Database):** Parses the article plan into structured JSON and appends it to **Google Sheets** (`Content_Plan` tab) for project management.\n*   **Notification:** Sends a summary Email with direct links to the Strategy Doc, Research Report, and Spreadsheet.\n\n---\n\n## 🛠️ Tech Stack & APIs\n*   **Data Source:** DataForSEO (`serp_competitors`, `competitors_domain`, `relevant_pages`, `ranked_keywords`).\n*   **Intelligence:** Google Gemini / OpenAI (via LangChain).\n*   **Logic:** Javascript (n8n Code Nodes) for complex data flattening and file handling.\n*   **Storage:** Google Drive & Google Sheets.\n*   **Notification:** Gmail.\n\n## 📊 Output Data Model (Google Sheets)\nThe workflow populates two specific tabs:\n\n**1. Raw_Competitor_Data (The Evidence):**\n*   `Competitor` & `Target Page`\n*   `Keyword`, `Search Volume`, `CPC`\n*   `Difficulty` & `Top Bid`\n*   `Ranking Value ($)` & `Yearly Trend`\n\n**2. Content_Plan (The Action Plan):**\n*   `Article ID` & `Type` (Pillar/Cluster)\n*   `Primary Keyword` & `Secondary Keywords`\n*   `Purpose / Angle` & `Priority`",
+        "height": 2016,
+        "width": 1536,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3136,
+        208
+      ],
+      "id": "e7e31389-49d9-4a3a-abf5-4fc6ede40d26",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Copy my Google Sheet below:\nhttps://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?gid=1303218187#gid=1303218187\n",
+        "width": 640,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        48
+      ],
+      "id": "362ad6df-824a-42f1-ad4b-dd185a285b8f",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "top_keywords",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -1424,
+        1312
+      ],
+      "id": "b8df4771-0c08-4136-b9df-d7e537af6aae",
+      "name": "Split Out KW"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "top_pages",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        976
+      ],
+      "id": "a99f0904-3930-4f7b-9ba9-2ee73a5ae4d8",
+      "name": "Split Out Top Pages"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE",
+          "mode": "list",
+          "cachedResultName": "SEVOsmith_Content_Planner_Shared",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1663860495,
+          "mode": "list",
+          "cachedResultName": "Manager",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit#gid=1663860495"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Action",
+              "lookupValue": "To_Do"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -1056,
+        544
+      ],
+      "id": "799f4443-30e2-4de1-b16c-fa5b138a7cf0",
+      "name": "Get Main Keyword",
+      "executeOnce": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "auYpM9otybGTlYsx",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "minutes"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE",
+          "mode": "list",
+          "cachedResultName": "SEVOsmith_Content_Planner_Shared",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1663860495,
+          "mode": "list",
+          "cachedResultName": "Manager",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit#gid=1663860495"
+        },
+        "options": {
+          "columnsToWatch": [
+            "Action"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1568,
+        544
+      ],
+      "id": "375cf2b7-bc4e-4c84-a2b6-9a2ff7e62167",
+      "name": "SEVOsmith_Trigger",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "DUj9LNRfjPyDpEJB",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "af2a5d86-7cdd-42f8-893b-4fd018a7aee1",
+              "leftValue": "={{ $json.Action }}",
+              "rightValue": "To_Do",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -1296,
+        544
+      ],
+      "id": "a817e4f7-556f-43ae-a800-2e544463c3f8",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5f4b8576-0afa-439b-9ae1-9c38822fed3b",
+              "name": "Seed_Keywords",
+              "value": "={{ $json.Seed_Keywords }}",
+              "type": "string"
+            },
+            {
+              "id": "94c47426-abdb-40ce-a0ab-5bdb70b95480",
+              "name": "Strategy_Mode",
+              "value": "={{ $json.Strategy_Mode }}",
+              "type": "string"
+            },
+            {
+              "id": "50af0977-2011-49c8-adaf-2fd3f10b56bf",
+              "name": "My_Domain",
+              "value": "={{ $json.My_Domain }}",
+              "type": "string"
+            },
+            {
+              "id": "16f336f7-0d11-413c-bb50-4b1769d4331d",
+              "name": "Known_Competitors",
+              "value": "={{ $json.Known_Competitors }}",
+              "type": "string"
+            },
+            {
+              "id": "b887d01b-9ebb-4165-8549-f3b859270991",
+              "name": "location_code",
+              "value": "={{ $json.location_code }}",
+              "type": "number"
+            },
+            {
+              "id": "d264138d-2a20-4545-9dba-d76b3397e40b",
+              "name": "language_code",
+              "value": "={{ $json.language_code }}",
+              "type": "string"
+            },
+            {
+              "id": "5f0f56ce-a65c-4efe-9567-cda410486563",
+              "name": "Competitor_Limit",
+              "value": "={{ $json.Competitor_Limit }}",
+              "type": "number"
+            },
+            {
+              "id": "c066d1f5-8b6e-4b56-8a0e-421f00dc38f0",
+              "name": "Pages_Per_Competitor",
+              "value": "={{ $json.Pages_Per_Competitor }}",
+              "type": "number"
+            },
+            {
+              "id": "5da451a4-d529-4771-926d-8d06eccef124",
+              "name": "Keywords_Per_Page",
+              "value": "={{ $json.Keywords_Per_Page }}",
+              "type": "number"
+            },
+            {
+              "id": "6b860779-4328-4dae-89f9-e08b785e3c0d",
+              "name": "target_language",
+              "value": "={{ $json.Language }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -560,
+        544
+      ],
+      "id": "ba0d54bd-14ca-4762-9174-54fc7e077696",
+      "name": "Set Input Data"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/dataforseo_labs/google/competitors_domain/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n  (() => {\n    const prep = $('Preparation').first().json;\n    \n    const customIgnoreList = [\n      \"clutch.co\", \"upcity.com\", \"goodfirms.co\", \"sortlist.com\", \n      \"themanifest.com\", \"yellowpages.com\", \"yelp.com\", \"semrush.com\", \n      \"ahrefs.com\", \"glassdoor.com\", \"indeed.com\", \"capterra.com\", \n      \"g2.com\", \"trustpilot.com\", \"wikipedia.org\", \"linkedin.com\",\n      \"facebook.com\", \"pinterest.com\", \"reddit.com\"\n    ];\n    \n    const requestBody = {\n      \"target\": prep.My_Domain,\n      \"location_code\": prep.location_code,\n      \"language_code\": prep.language_code,\n      \"limit\": 20,\n      \"filters\": [\n        [\"metrics.organic.count\", \">\", 5]\n      ],\n      \"exclude_top_domains\": true,\n      \"exclude_domains\": customIgnoreList,\n      \"order_by\": [\"metrics.organic.count,desc\"]\n    };\n    \n    if (prep.formatted_intersecting_domains && prep.formatted_intersecting_domains.length > 0) {\n      requestBody.intersecting_domains = prep.formatted_intersecting_domains;\n    }\n    \n    return JSON.stringify([requestBody]);\n  })()\n}}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1312,
+        1024
+      ],
+      "id": "93c11f42-bcf9-4a10-a2b5-436e639a6d98",
+      "name": "Competitors Domain",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "ABmCxGcBagPhxsUA",
+          "name": "DataforSEO"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\n\n// Loop through all incoming items\nfor (const item of $input.all()) {\n  const data = item.json;\n  \n  // 1. GET STRATEGY (Removed legacy 'Strategy_Type')\n  const strategy = data.Strategy_Mode;\n\n  // ============================================================\n  // 2. VALIDATION LOGIC\n  // ============================================================\n\n  // --- Domain Defender ---\n  if (strategy === 'Domain Defender') {\n    // Removed legacy 'data.domain' check\n    const domainValue = data.My_Domain; \n\n    if (!domainValue || domainValue.toString().trim() === '') {\n      throw new Error(`⛔ VALIDATION ERROR: You selected '${strategy}' but the 'My_Domain' field is empty. Please enter your domain.`);\n    }\n  }\n\n  // --- Topic Explorer ---\n  if (strategy === 'Topic Explorer') {\n    const keywordsValue = data.Seed_Keywords;\n\n    if (!keywordsValue || (Array.isArray(keywordsValue) && keywordsValue.length === 0) || keywordsValue.toString().trim() === '') {\n      throw new Error(`⛔ VALIDATION ERROR: You selected '${strategy}' but no Keywords were provided.`);\n    }\n  }\n\n  // --- Manual Analysis ---\n  if (strategy === 'Manual Analysis') {\n      const manual = data.Known_Competitors;\n      if (!manual || manual.toString().trim() === '') {\n          throw new Error(\"⛔ VALIDATION ERROR: For 'Manual Analysis', you must enter domains in the 'Known_Competitors' field.\");\n      }\n  }\n\n  // ============================================================\n  // 3. DATA PREPARATION: KNOWN COMPETITORS\n  // ============================================================\n\n  const rawKnown = data.Known_Competitors || \"\";\n  let intersectingArray = [];\n\n  if (rawKnown && rawKnown.toString().trim() !== \"\") {\n    intersectingArray = rawKnown\n        .split(/[,\\n]+/) // Split by comma or newline\n        .map(d => d.trim().replace(/^(https?:\\/\\/)?(www\\.)?/, '').split('/')[0]) // Clean URL to domain\n        .filter(d => d.length > 0);\n  }\n\n  // ============================================================\n  // 4. DATA PREPARATION: SEED KEYWORDS\n  // ============================================================\n\n  const rawKeywords = data.Seed_Keywords;\n  let keywordArray = [];\n\n  // Case A: Input is already an Array\n  if (Array.isArray(rawKeywords)) {\n    keywordArray = rawKeywords\n      .map(k => typeof k === 'string' ? k.trim() : k)\n      .filter(k => k); \n  } \n  // Case B: Input is a String\n  else if (typeof rawKeywords === 'string' && rawKeywords.trim() !== \"\") {\n    keywordArray = rawKeywords\n      .split(/[,\\n\\r]+/) // Split by Newline or Comma\n      .map(k => k.trim())\n      .filter(k => k);\n  }\n\n  // ============================================================\n  // 5. OUTPUT\n  // ============================================================\n  \n  results.push({\n    json: {\n      ...data, // Keep original fields (Country, Language, My_Domain, etc.)\n      \n      // Clean Arrays for APIs:\n      formatted_intersecting_domains: intersectingArray, \n      formatted_keywords: keywordArray \n    }\n  });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -176,
+        544
+      ],
+      "id": "665411a4-ec98-49c3-afd7-56f483ba0fc5",
+      "name": "Preparation"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================================\n// 1. CONFIGURATION\n// ============================================================\n\nlet configData = {};\ntry {\n    configData = $('Preparation').first().json;\n} catch(e) {\n    configData = $input.all()[0].json; \n}\n\nconst inputLimit = configData.Competitor_Limit;\nconst PROCESS_LIMIT = (inputLimit === 0) ? 50 : (inputLimit || 10);\n\nconst IGNORE_DOMAINS = [\n  \"wikipedia.org\", \"pinterest.com\", \"amazon.com\", \"google.com\", \"facebook.com\",\n  \"wordpress.com\", \"medium.com\", \"quora.com\", \"reddit.com\", \"youtube.com\",\n  \"ebay.com\", \"uol.com.br\", \"instagram.com\", \"olx.com\", \"twitter.com\",\n  \"linkedin.com\", \"slideshare.net\", \"clutch.co\", \"yelp.com\", \"yellowpages.com\",\n  \"glassdoor.com\", \"indeed.com\", \"tiktok.com\", \"mumsnet.com\", \"justanswer.com\"\n];\n\nconst myDomain = (configData.My_Domain || \"\").trim().toLowerCase();\n\n// ============================================================\n// 2. DATA COLLECTION\n// ============================================================\nlet masterList = [];\n\n// --- A. Process Manual Competitors ---\nconst manualInput = configData.Known_Competitors || \"\";\nif (manualInput.length > 0) {\n    const manuals = manualInput.split(/[,\\n]+/).map(d => {\n        const clean = d.trim().replace(/^(https?:\\/\\/)?(www\\.)?/, '').split('/')[0];\n        if (clean) {\n            masterList.push({\n                domain: clean,\n                source: \"manual\",\n                relevance_score: 999999,\n                real_intersection: 0, // Placeholder\n                median_rank: 1,\n                traffic: 0,\n                traffic_value: 0,\n                total_keywords: 0,\n                top_3_keywords: 0,\n                new_keywords: 0,\n                lost_keywords: 0\n            });\n        }\n    });\n}\n\n// --- B. Process API Results ---\nconst items = $input.all();\nlet apiItems = [];\n\nif (items.length > 0 && items[0].json.tasks && items[0].json.tasks[0].result) {\n    const resultData = items[0].json.tasks[0].result[0];\n    if (resultData.items && Array.isArray(resultData.items)) {\n        apiItems = resultData.items;\n    }\n}\n\nfor (const item of apiItems) {\n    const domain = item.domain || item.target;\n\n    const organic = item.full_domain_metrics?.organic || item.metrics?.organic || {};\n    \n    // Core Stats\n    const relevance = item.intersections || item.relevant_serp_items || item.keywords_count || organic.count || 0;\n    const rank = item.median_position || item.avg_position || organic.median_position || 101;\n    const traffic = item.etv || organic.etv || 0;\n    const trafficValue = organic.estimated_paid_traffic_cost || 0;\n    const totalKeywords = organic.count || 0;\n    const top3 = (organic.pos_1 || 0) + (organic.pos_2_3 || 0);\n    const newKw = organic.is_new || 0;\n    const lostKw = organic.is_lost || 0;\n\n    if (domain) {\n        masterList.push({\n            domain: domain,\n            source: \"api\",\n            relevance_score: relevance,\n            real_intersection: relevance, // Store real value here\n            median_rank: rank,\n            traffic: traffic,\n            traffic_value: trafficValue,\n            total_keywords: totalKeywords,\n            top_3_keywords: top3,\n            new_keywords: newKw,\n            lost_keywords: lostKw\n        });\n    }\n}\n\n// ============================================================\n// 3. FILTERING & DEDUPLICATION (SMART MERGE)\n// ============================================================\nconst uniqueMap = new Map();\n\nfor (const item of masterList) {\n    const d = item.domain.toLowerCase().trim();\n    \n    if (myDomain && d.includes(myDomain)) continue;\n    if (IGNORE_DOMAINS.some(ign => d.includes(ign))) continue;\n    \n    if (!uniqueMap.has(d)) {\n        uniqueMap.set(d, item);\n    } else {\n        const existing = uniqueMap.get(d);\n        \n        // A. Check if Manual\n        const isManual = existing.source === 'manual' || item.source === 'manual';\n        \n        // B. Pick Better Data\n        const betterData = (item.traffic_value > existing.traffic_value || item.relevance_score > existing.relevance_score) \n                           ? item \n                           : existing;\n        \n        // C. Update: Enforce Manual Source & Priority\n        if (isManual) {\n             betterData.source = 'manual';\n             betterData.relevance_score = 999999; \n             // If we merged, keep the real intersection count from the API item\n             betterData.real_intersection = Math.max(item.real_intersection || 0, existing.real_intersection || 0);\n        }\n        \n        uniqueMap.set(d, betterData);\n    }\n}\n\n// ============================================================\n// 4. SORTING & OUTPUT\n// ============================================================\nlet finalCompetitors = Array.from(uniqueMap.values());\n\nfinalCompetitors.sort((a, b) => {\n    if (a.source === 'manual' && b.source !== 'manual') return -1;\n    if (b.source === 'manual' && a.source !== 'manual') return 1;\n    \n    // Sort by Relevance Score (which is 999999 for manuals)\n    if (b.relevance_score !== a.relevance_score) return b.relevance_score - a.relevance_score;\n    if (b.traffic_value !== a.traffic_value) return b.traffic_value - a.traffic_value;\n    \n    return b.traffic - a.traffic;\n});\n\nif (PROCESS_LIMIT > 0) {\n    finalCompetitors = finalCompetitors.slice(0, PROCESS_LIMIT);\n}\n\nconst results = [];\nfor (const comp of finalCompetitors) {\n    // Logic to display REAL intersection count in reports, not the sorting hack\n    const displaySharedKw = (comp.source === 'manual' && comp.real_intersection === 0 && comp.relevance_score === 999999)\n        ? 0 // True manual with no API match\n        : comp.real_intersection; // Merged manual or API result\n\n    results.push({\n        json: {\n            domain: comp.domain,\n            source: comp.source,\n            location_code: configData.location_code,\n            language_code: configData.language_code,\n            my_domain: myDomain,\n            \n            // 📊 CLEAN METRICS\n            shared_keywords: displaySharedKw, // Fixed: Shows real count now\n            median_rank: comp.median_rank,\n            est_monthly_traffic: comp.traffic,\n            traffic_value_usd: comp.traffic_value,\n            total_ranked_keywords: comp.total_keywords,\n            top_3_keywords: comp.top_3_keywords,\n            momentum_new: comp.new_keywords,\n            momentum_lost: comp.lost_keywords\n        }\n    });\n}\n\nif (results.length === 0) return [];\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        912
+      ],
+      "id": "209bd714-4bb5-477b-b055-73efb2842a65",
+      "name": "Competitor Collector"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE",
+          "mode": "list",
+          "cachedResultName": "SEVOsmith_Content_Planner_Shared",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1859050553,
+          "mode": "list",
+          "cachedResultName": "Competitor_Overview",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit#gid=1859050553"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -816,
+        784
+      ],
+      "id": "8bfe0656-8126-4e88-810d-018b40eabeb7",
+      "name": "Get Existing Competitors",
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "waitBetweenTries": 5000,
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "auYpM9otybGTlYsx",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Get NEW Data (from Collector)\nconst newCompetitors = $('Competitor Collector').all().map(i => i.json);\n\n// 2. Get OLD Data (from Sheet Read)\nconst sheetRows = $input.all().map(i => i.json);\n\nconst results = [];\n\n// Helper function to safely parse numbers from Sheets (removes commas/text)\nconst parseNum = (val) => {\n    if (!val) return 0;\n    const clean = val.toString().replace(/[^0-9.-]+/g,\"\"); \n    return Number(clean) || 0;\n};\n\nfor (const newItem of newCompetitors) {\n  const domain = newItem.domain.trim().toLowerCase();\n  \n  // Find match in sheet\n  const existingRow = sheetRows.find(row => row['Domain'] && row['Domain'].toString().trim().toLowerCase() === domain);\n\n  let finalData = { ...newItem };\n\n  if (existingRow) {\n    // --- SMART MERGE LOGIC ---\n    \n    // 1. Traffic & Value (Keep Max)\n    finalData.est_monthly_traffic = Math.max(\n        parseNum(newItem.est_monthly_traffic), \n        parseNum(existingRow['Est. Monthly Traffic'])\n    );\n\n    finalData.traffic_value_usd = Math.max(\n        parseNum(newItem.traffic_value_usd), \n        parseNum(existingRow['Traffic Value ($)'])\n    );\n        \n    // 2. Keyword Counts (Keep Max)\n    finalData.total_ranked_keywords = Math.max(\n        parseNum(newItem.total_ranked_keywords), \n        parseNum(existingRow['Total Ranked Keywords'])\n    );\n\n    finalData.top_3_keywords = Math.max(\n        parseNum(newItem.top_3_keywords), \n        parseNum(existingRow['Top 3 Keywords'])\n    );\n\n    // 3. Momentum (Prefer Sheet data if New data is 0)\n    if (parseNum(newItem.momentum_new) === 0 && parseNum(existingRow['Momentum (New)']) > 0) {\n        finalData.momentum_new = existingRow['Momentum (New)'];\n        finalData.momentum_lost = existingRow['Momentum (Lost)'];\n    }\n\n    // 4. Source (Once API, always API)\n    if (existingRow['Source'] === 'api' || newItem.source === 'api') {\n        finalData.source = 'api';\n    }\n    \n    // 5. Shared Keywords (Relevance)\n    // If manual is 999999, keep it. Otherwise Max.\n    const newScore = parseNum(newItem.shared_keywords);\n    const oldScore = parseNum(existingRow['Shared Keywords']);\n    \n    if (newScore === 999999 || oldScore === 999999) {\n         finalData.shared_keywords = 999999;\n    } else {\n         finalData.shared_keywords = Math.max(newScore, oldScore);\n    }\n  } \n  \n  results.push({ json: finalData });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -576,
+        784
+      ],
+      "id": "22d56859-e9c7-4aca-b69d-96e843a5adda",
+      "name": "Smart Merge"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE",
+          "mode": "list",
+          "cachedResultName": "SEVOsmith_Content_Planner_Shared",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1859050553,
+          "mode": "list",
+          "cachedResultName": "Competitor_Overview",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit#gid=1859050553"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Domain": "={{ $json.domain }}",
+            "Source": "={{ $json.source }}",
+            "Shared Keywords": "={{ $json.shared_keywords }}",
+            "Median Rank": "={{ $json.median_rank }}",
+            "Est. Monthly Traffic": "={{ $json.est_monthly_traffic }}",
+            "Traffic Value ($)": "={{ $json.traffic_value_usd }}",
+            "Total Ranked Keywords": "={{ $json.total_ranked_keywords }}",
+            "Top 3 Keywords": "={{ $json.top_3_keywords }}",
+            "Momentum (New)": "={{ $json.momentum_new }}",
+            "Momentum (Lost)": "={{ $json.momentum_lost }}"
+          },
+          "matchingColumns": [
+            "Domain"
+          ],
+          "schema": [
+            {
+              "id": "Domain",
+              "displayName": "Domain",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Shared Keywords",
+              "displayName": "Shared Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Median Rank",
+              "displayName": "Median Rank",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Est. Monthly Traffic",
+              "displayName": "Est. Monthly Traffic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Traffic Value ($)",
+              "displayName": "Traffic Value ($)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Total Ranked Keywords",
+              "displayName": "Total Ranked Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Top 3 Keywords",
+              "displayName": "Top 3 Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Momentum (New)",
+              "displayName": "Momentum (New)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Momentum (Lost)",
+              "displayName": "Momentum (Lost)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -256,
+        784
+      ],
+      "id": "83b1e4a0-b7f4-49a6-856f-95abba309232",
+      "name": "Update Competitors List",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "waitBetweenTries": 5000,
+      "executeOnce": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "auYpM9otybGTlYsx",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE",
+          "mode": "list",
+          "cachedResultName": "SEVOsmith_Content_Planner_Shared",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1663860495,
+          "mode": "list",
+          "cachedResultName": "Manager",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit#gid=1663860495"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Report": "=https://docs.google.com/document/d/{{ $json.id }}",
+            "Session ID": "={{ $('Preparation').first().json.session_id }}",
+            "Action": "Completed"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Project",
+              "displayName": "Project",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Session ID",
+              "displayName": "Session ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Country",
+              "displayName": "Country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Language",
+              "displayName": "Language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Seed_Keywords",
+              "displayName": "Seed_Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Action",
+              "displayName": "Action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Strategy_Mode",
+              "displayName": "Strategy_Mode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "My_Domain",
+              "displayName": "My_Domain",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Known_Competitors",
+              "displayName": "Known_Competitors",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Competitor_Limit",
+              "displayName": "Competitor_Limit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Pages_Per_Competitor",
+              "displayName": "Pages_Per_Competitor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Keywords_Per_Page",
+              "displayName": "Keywords_Per_Page",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Report",
+              "displayName": "Report",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -208,
+        1632
+      ],
+      "id": "804b774e-111f-4d20-8bac-2a14af08bf04",
+      "name": "Update Report Link",
+      "executeOnce": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "auYpM9otybGTlYsx",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code Node: Generate Session ID & Normalize Keyword\n// ------------------------------------------------------------------------------------------\n\n// 1. Get the Keyword from the input\nconst inputData = $input.first().json;\nlet rawInput = inputData.Seed_Keywords || \"\";\n\n// Robust handling: If it's an array or comma-list, take the first one\nif (Array.isArray(rawInput)) {\n  rawInput = rawInput[0] || \"\";\n} else if (typeof rawInput === 'string') {\n  rawInput = rawInput.split(/[,\\n]+/)[0]; // Split by comma/newline and take first\n}\n\nconst rawKeyword = rawInput || \"unknown-keyword\";\n\n// --- 2. Session ID Generation (YYYYMMDD_HHMMSS) ---\nconst d = new Date();\nconst pad2 = (n) => String(n).padStart(2, '0');\n\nconst year = d.getFullYear(); \nconst month = pad2(d.getMonth() + 1);\nconst day = pad2(d.getDate());\nconst hours = pad2(d.getHours());\nconst minutes = pad2(d.getMinutes());\nconst seconds = pad2(d.getSeconds());\n\n// Format: 20251225_221404\nconst sessionId = `${year}${month}${day}_${hours}${minutes}${seconds}`;\n\n// --- 3. Keyword Normalization ---\n// Step 1: Trim whitespace\n// Step 2: Lowercase\n// Step 3: Replace spaces with hyphens (e.g., \"seo agency\" -> \"seo-agency\")\n// Step 4: Remove special characters (optional, keeps filenames clean)\nconst normalizedKeyword = rawKeyword.toString()\n  .trim()\n  .toLowerCase()\n  .replace(/\\s+/g, '-')\n  .replace(/[^a-z0-9\\-]/g, '');\n\n// --- 4. Return Output ---\nreturn [{\n  json: {\n    // Merge with original data so you don't lose context\n    ...inputData,\n    session_id: sessionId,\n    normalize_kw: normalizedKeyword\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -368,
+        544
+      ],
+      "id": "f5c99284-1613-4321-a6f5-34f8696e1bd3",
+      "name": "Generate_Session_ID"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE",
+          "mode": "list",
+          "cachedResultName": "SEVOsmith_Content_Planner_Shared",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1663860495,
+          "mode": "list",
+          "cachedResultName": "Manager",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit#gid=1663860495"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Seed_Keywords": "={{ $json.Seed_Keywords }}",
+            "Session ID": "={{ $json.session_id }}"
+          },
+          "matchingColumns": [
+            "Seed_Keywords"
+          ],
+          "schema": [
+            {
+              "id": "Project",
+              "displayName": "Project",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Session ID",
+              "displayName": "Session ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Country",
+              "displayName": "Country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Language",
+              "displayName": "Language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Seed_Keywords",
+              "displayName": "Seed_Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Action",
+              "displayName": "Action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Strategy_Mode",
+              "displayName": "Strategy_Mode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "My_Domain",
+              "displayName": "My_Domain",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Known_Competitors",
+              "displayName": "Known_Competitors",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Competitor_Limit",
+              "displayName": "Competitor_Limit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Pages_Per_Competitor",
+              "displayName": "Pages_Per_Competitor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Keywords_Per_Page",
+              "displayName": "Keywords_Per_Page",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Report",
+              "displayName": "Report",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        0,
+        544
+      ],
+      "id": "8ea1b711-2792-4522-9ab2-6ba8b78a5403",
+      "name": "Update Session ID",
+      "alwaysOutputData": false,
+      "retryOnFail": false,
+      "waitBetweenTries": 5000,
+      "executeOnce": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "auYpM9otybGTlYsx",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "![n8n Creator Profile](https://app.dataforseo.com/assets/images/ukr-logo-border-706-104.png)",
+        "height": 128,
+        "width": 528,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2416,
+        80
+      ],
+      "id": "6ed6e860-19b3-4f61-89d1-cf0f778508b0",
+      "name": "Sticky Note30"
+    },
+    {
+      "parameters": {
+        "content": "![nextgrowth.ai](https://nextgrowth.ai/wp-content/uploads/2025/08/cropped-logo.png)",
+        "height": 128,
+        "width": 288,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1888,
+        80
+      ],
+      "id": "ac3aa4d7-babb-44af-81ff-40b6252633bb",
+      "name": "Sticky Note32"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Output Parser v1.1.0\n * \n * Purpose: Parse LLM agent output separated by ---ARTICLE_LIST_JSON---\n * Input: Agent output + Preparation node data\n * Output: Two items - (1) Markdown content, (2) Articles JSON data\n * \n * Changelog:\n * v1.1.0 (2025-12-28) - Added support for Preparation node input\n * v1.0.1 (2025-12-28) - Fixed node reference error\n * v1.0.0 (2025-12-28) - Initial version\n */\n\n// Get the raw output from the agent\nconst input = $input.first().json;\n\n// Handle different possible input structures\nlet rawOutput;\nif (input.output) {\n  rawOutput = input.output;\n} else if (input.text) {\n  rawOutput = input.text;\n} else if (typeof input === 'string') {\n  rawOutput = input;\n} else {\n  throw new Error('Could not find output field. Available fields: ' + Object.keys(input).join(', '));\n}\n\n// Get data from Preparation node\nlet preparationData = {};\ntry {\n  preparationData = $('Preparation').item.json;\n} catch (e) {\n  // Preparation node not found, will use defaults\n  console.log('Preparation node not found, using defaults');\n}\n\n// Split by the separator\nconst separator = '---ARTICLE_LIST_JSON---';\nconst parts = rawOutput.split(separator);\n\nif (parts.length !== 2) {\n  throw new Error(`Expected 2 parts separated by \"${separator}\", but got ${parts.length} parts`);\n}\n\n// Extract markdown and JSON\nconst markdownContent = parts[0].trim();\nconst jsonRawContent = parts[1].trim();\n\n// Parse the JSON\nlet articlesData;\ntry {\n  // Remove any markdown code fences if present\n  const cleanJson = jsonRawContent\n    .replace(/```json\\n?/g, '')\n    .replace(/```\\n?/g, '')\n    .trim();\n  \n  articlesData = JSON.parse(cleanJson);\n} catch (parseError) {\n  throw new Error(`JSON parse failed: ${parseError.message}\\n\\nFirst 500 chars:\\n${jsonRawContent.substring(0, 500)}`);\n}\n\n// Validate the structure\nif (!articlesData.articles || !Array.isArray(articlesData.articles)) {\n  throw new Error('JSON missing \"articles\" array. Found: ' + Object.keys(articlesData).join(', '));\n}\n\n// Generate timestamp\nconst timestamp = new Date().toISOString().split('T')[0];\n\n// Get seed keyword from Preparation node (priority order)\nlet seedKeyword = 'content-plan';\nlet normalizedKeyword = '';\n\nif (preparationData.normalize_kw) {\n  // Use the normalized keyword from Preparation (already sanitized)\n  normalizedKeyword = preparationData.normalize_kw;\n  seedKeyword = preparationData.Seed_Keywords || preparationData.normalize_kw;\n} else if (preparationData.Seed_Keywords) {\n  // Fallback to raw seed keyword\n  seedKeyword = preparationData.Seed_Keywords;\n  normalizedKeyword = seedKeyword\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, '-')\n    .replace(/^-+|-+$/g, '')\n    .substring(0, 50);\n} else if (articlesData.project_metadata?.project_name) {\n  // Last resort: use project name from articles\n  seedKeyword = articlesData.project_metadata.project_name;\n  normalizedKeyword = seedKeyword\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, '-')\n    .replace(/^-+|-+$/g, '')\n    .substring(0, 50);\n}\n\n// Use normalized keyword for filename (or sanitize if not available)\nconst filenameKeyword = normalizedKeyword || seedKeyword\n  .toLowerCase()\n  .replace(/[^a-z0-9]+/g, '-')\n  .replace(/^-+|-+$/g, '')\n  .substring(0, 50);\n\n// Return two separate outputs with enriched metadata\nreturn [\n  {\n    json: {\n      type: 'markdown',\n      content: markdownContent,\n      filename: `Strategy__${filenameKeyword}__${timestamp}.md`,\n      \n      // Metadata from Preparation\n      seed_keyword: seedKeyword,\n      my_domain: preparationData.My_Domain || '',\n      competitors: preparationData.formatted_intersecting_domains || [],\n      country: preparationData.Country || '',\n      language: preparationData.Language || '',\n      session_id: preparationData.session_id || '',\n      \n      // Stats\n      word_count: markdownContent.split(/\\s+/).length,\n      created_at: new Date().toISOString(),\n      version: '1.1.0'\n    }\n  },\n  {\n    json: {\n      type: 'articles',\n      data: articlesData,\n      filename: `Articles__${filenameKeyword}__${timestamp}.json`,\n      \n      // Metadata from Preparation\n      seed_keyword: seedKeyword,\n      my_domain: preparationData.My_Domain || '',\n      competitors: preparationData.formatted_intersecting_domains || [],\n      country: preparationData.Country || '',\n      language: preparationData.Language || '',\n      session_id: preparationData.session_id || '',\n      \n      // Stats\n      article_count: articlesData.articles.length,\n      pillar_count: articlesData.content_architecture?.pillars?.length || 0,\n      created_at: new Date().toISOString(),\n      version: '1.1.0'\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -960,
+        1648
+      ],
+      "id": "bcb086d7-cb8d-4820-9b8a-813451a0ace5",
+      "name": "Output Parser"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "numberInputs": 4,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -32,
+        1792
+      ],
+      "id": "5bc363e9-4782-43f6-a973-fe3dc221d4a6",
+      "name": "Wait for All"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Prepare Articles for Google Sheets v1.2.0\n * \n * Purpose: Transform articles JSON into flat rows for Google Sheets\n * Input: Parsed articles data + Preparation context\n * Output: Array of row objects ready for Google Sheets\n * \n * Changelog:\n * v1.2.0 (2025-12-28) - Fixed session_id by reading from Preparation node\n * v1.1.0 (2025-12-28) - Added Preparation node context\n * v1.0.0 (2025-12-28) - Initial version\n */\n\n// Get the input from Output Parser\nconst input = $input.first().json;\n\n// Only process if this is the articles output (not markdown)\nif (input.type !== 'articles') {\n  return [];\n}\n\n// Get session_id from Preparation node\nconst prep = $('Preparation').first().json;\nconst sessionId = prep.session_id || '';\nconst country = prep.Country || '';\nconst language = prep.target_language || '';\n\n// Extract articles array\nconst articlesData = input.data;\nconst articles = articlesData.articles || [];\n\nif (articles.length === 0) {\n  throw new Error('No articles found in data');\n}\n\n// Get metadata from the parsed output\nconst seedKeyword = input.seed_keyword || '';\nconst myDomain = input.my_domain || '';\nconst competitors = input.competitors || [];\n\n// Get project metadata from articles\nconst projectName = articlesData.project_metadata?.project_name || 'Unknown Project';\nconst targetMarket = articlesData.project_metadata?.target_market || '';\n\n// Transform each article into a Google Sheets row\nconst rows = articles.map((article, index) => {\n  // Format secondary keywords\n  const secondaryKeywords = article.seo_data.secondary_keywords\n    .map(kw => `${kw.keyword} (${kw.volume})`)\n    .join('\\n');\n  \n  // Get just the keyword names (for keyword column)\n  const secondaryKeywordsList = article.seo_data.secondary_keywords\n    .map(kw => kw.keyword)\n    .join(', ');\n  \n  // Calculate total keyword volume\n  const totalVolume = article.seo_data.primary_keyword_volume + \n    article.seo_data.secondary_keywords.reduce((sum, kw) => sum + kw.volume, 0);\n  \n  return {\n    json: {\n      // Project Context (from Preparation node)\n      session_id: sessionId,\n      seed_keyword: seedKeyword,\n      my_domain: myDomain,\n      target_market: targetMarket,\n      competitors: competitors.join(', '),\n      \n      // Article Identification\n      row_number: index + 1,\n      article_id: article.article_id,\n      article_type: article.article_type,\n      parent_pillar: article.parent_pillar || 'None',\n      priority: article.priority,\n      \n      // SEO Data\n      primary_keyword: article.seo_data.primary_keyword,\n      primary_volume: article.seo_data.primary_keyword_volume,\n      secondary_keywords_formatted: secondaryKeywords,\n      secondary_keywords_list: secondaryKeywordsList,\n      total_keyword_volume: totalVolume,\n      \n      // Content\n      article_purpose: article.article_purpose,\n      \n      // Project Info\n      project_name: projectName,\n      country: country,\n      language: language,\n      \n      // Metadata\n      created_at: new Date().toISOString(),\n      date: new Date().toISOString().split('T')[0]\n    }\n  };\n});\n\nreturn rows;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -576,
+        1840
+      ],
+      "id": "470fd408-0c67-428b-8dbb-8fb310e15208",
+      "name": "Prepare Articles"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Prepare Pillars Summary v1.2.0\n * \n * Purpose: Create summary table of content pillars with context\n * Input: Parsed articles data with Preparation context\n * Output: Array of pillar summary rows\n * \n * Changelog:\n * v1.2.0 (2025-12-28) - Fixed session_id by reading from Preparation node\n * v1.1.0 (2025-12-28) - Added Preparation context\n * v1.0.0 (2025-12-28) - Initial version\n */\n\nconst input = $input.first().json;\n\n// Only process articles output\nif (input.type !== 'articles') {\n  return [];\n}\n\n// Get session_id and context from Preparation node\nconst prep = $('Preparation').first().json;\nconst sessionId = prep.session_id || '';\nconst country = prep.Country || '';\nconst language = prep.target_language || '';\n\nconst articlesData = input.data;\nconst pillars = articlesData.content_architecture?.pillars || [];\nconst articles = articlesData.articles || [];\n\n// Get context from parsed output\nconst seedKeyword = input.seed_keyword || '';\nconst myDomain = input.my_domain || '';\nconst projectName = articlesData.project_metadata?.project_name || '';\nconst targetMarket = articlesData.project_metadata?.target_market || '';\n\n// Create summary for each pillar\nconst pillarRows = pillars.map((pillar, index) => {\n  // Find the pillar article to get keyword data\n  const pillarArticle = articles.find(a => a.article_id === pillar.pillar_id);\n  \n  // Find all cluster articles\n  const clusterArticles = articles.filter(a => a.parent_pillar === pillar.pillar_id);\n  \n  // Calculate total volume for this pillar (pillar + all clusters)\n  let totalVolume = 0;\n  if (pillarArticle) {\n    totalVolume += pillarArticle.seo_data.primary_keyword_volume;\n    totalVolume += pillarArticle.seo_data.secondary_keywords.reduce((sum, kw) => sum + kw.volume, 0);\n  }\n  clusterArticles.forEach(cluster => {\n    totalVolume += cluster.seo_data.primary_keyword_volume;\n    totalVolume += cluster.seo_data.secondary_keywords.reduce((sum, kw) => sum + kw.volume, 0);\n  });\n  \n  return {\n    json: {\n      // Context (from Preparation node)\n      session_id: sessionId,\n      seed_keyword: seedKeyword,\n      my_domain: myDomain,\n      project_name: projectName,\n      target_market: targetMarket,\n      country: country,\n      language: language,\n      \n      // Pillar Info\n      row_number: index + 1,\n      pillar_id: pillar.pillar_id,\n      pillar_title: pillar.pillar_title,\n      \n      // Cluster Stats\n      planned_cluster_count: pillar.cluster_count,\n      actual_cluster_count: clusterArticles.length,\n      cluster_ids: pillar.cluster_ids.join(', '),\n      \n      // SEO Data\n      primary_keyword: pillarArticle ? pillarArticle.seo_data.primary_keyword : '',\n      primary_volume: pillarArticle ? pillarArticle.seo_data.primary_keyword_volume : 0,\n      total_pillar_volume: totalVolume,\n      \n      // Priority\n      priority: pillarArticle ? pillarArticle.priority : '',\n      \n      // Metadata\n      created_at: new Date().toISOString(),\n      date: new Date().toISOString().split('T')[0]\n    }\n  };\n});\n\nreturn pillarRows;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -576,
+        2032
+      ],
+      "id": "ebf8d2f3-8834-4e3b-b514-a65d8e68b116",
+      "name": "Prepare Pillars"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE",
+          "mode": "list",
+          "cachedResultName": "SEVOsmith_Content_Planner_Shared",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1475971893,
+          "mode": "list",
+          "cachedResultName": "Prepare_Articles",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit#gid=1475971893"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Type",
+              "displayName": "Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Parent Pillar",
+              "displayName": "Parent Pillar",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Priority",
+              "displayName": "Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Primary Keyword",
+              "displayName": "Primary Keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Volume",
+              "displayName": "Volume",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Secondary Keywords",
+              "displayName": "Secondary Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Purpose / Angle",
+              "displayName": "Purpose / Angle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Target Market",
+              "displayName": "Target Market",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -368,
+        1840
+      ],
+      "id": "92989bf0-7250-4ef5-a848-0964e85e7e1d",
+      "name": "Update Articles Plan",
+      "executeOnce": false,
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "auYpM9otybGTlYsx",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE",
+          "mode": "list",
+          "cachedResultName": "SEVOsmith_Content_Planner_Shared",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 21916224,
+          "mode": "list",
+          "cachedResultName": "Prepare_Pillars",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1C_MrKznRx2G8Htp9tjJHNluI_u4saLRyfeukrrTTBoE/edit#gid=21916224"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -368,
+        2032
+      ],
+      "id": "e9f7919e-474d-4222-9645-9834c0b51056",
+      "name": "Update Pillar Articles",
+      "executeOnce": false,
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "auYpM9otybGTlYsx",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3-pro-preview",
+        "options": {
+          "maxOutputTokens": 40000
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1296,
+        1856
+      ],
+      "id": "2c01f93c-9efa-4298-9820-39fbde812379",
+      "name": "Gemini 3 Pro",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "euZxvvvNArIrpNjZ",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "Competitor Crusher",
+        "formDescription": "Don't guess—know exactly how to win. We scan the market to find who is ranking #1, steal their best keyword ideas, and build a superior content roadmap and site structure automatically. Select 'Auto-Discover' to find your biggest threat, or enter a specific URL to dissect.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Seed_Keywords",
+              "fieldType": "textarea",
+              "placeholder": "Target Keywords. Required for Topic Explorer.",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Strategy_Mode",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Topic Explorer"
+                  },
+                  {
+                    "option": "Domain Defender"
+                  },
+                  {
+                    "option": "Manual Analysis"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "My_Domain",
+              "placeholder": "(Required for Domain Defender, Optional for Topic Explorer"
+            },
+            {
+              "fieldLabel": "Known_Competitors",
+              "fieldType": "textarea",
+              "placeholder": "Enter specific domains you want to spy on, separated by commas (e.g., competitor1.com, competitor2.com)."
+            },
+            {
+              "fieldLabel": "Competitor_Limit",
+              "fieldType": "number",
+              "placeholder": "Enter 0 if your want to process ALL competitors found."
+            },
+            {
+              "fieldLabel": "Country",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Australia"
+                  },
+                  {
+                    "option": "Austria"
+                  },
+                  {
+                    "option": "Bahrain"
+                  },
+                  {
+                    "option": "Bangladesh"
+                  },
+                  {
+                    "option": "Belgium"
+                  },
+                  {
+                    "option": "Brazil"
+                  },
+                  {
+                    "option": "Bulgaria"
+                  },
+                  {
+                    "option": "Canada"
+                  },
+                  {
+                    "option": "Chile"
+                  },
+                  {
+                    "option": "Colombia"
+                  },
+                  {
+                    "option": "Croatia"
+                  },
+                  {
+                    "option": "Cyprus"
+                  },
+                  {
+                    "option": "Czechia"
+                  },
+                  {
+                    "option": "Denmark"
+                  },
+                  {
+                    "option": "Egypt"
+                  },
+                  {
+                    "option": "Estonia"
+                  },
+                  {
+                    "option": "Finland"
+                  },
+                  {
+                    "option": "France"
+                  },
+                  {
+                    "option": "Germany"
+                  },
+                  {
+                    "option": "Greece"
+                  },
+                  {
+                    "option": "Hong Kong"
+                  },
+                  {
+                    "option": "Hungary"
+                  },
+                  {
+                    "option": "India"
+                  },
+                  {
+                    "option": "Indonesia"
+                  },
+                  {
+                    "option": "Ireland"
+                  },
+                  {
+                    "option": "Israel"
+                  },
+                  {
+                    "option": "Italy"
+                  },
+                  {
+                    "option": "Japan"
+                  },
+                  {
+                    "option": "Jordan"
+                  },
+                  {
+                    "option": "Kazakhstan"
+                  },
+                  {
+                    "option": "Kenya"
+                  },
+                  {
+                    "option": "Malaysia"
+                  },
+                  {
+                    "option": "Mexico"
+                  },
+                  {
+                    "option": "Morocco"
+                  },
+                  {
+                    "option": "Netherlands"
+                  },
+                  {
+                    "option": "New Zealand"
+                  },
+                  {
+                    "option": "Nigeria"
+                  },
+                  {
+                    "option": "Norway"
+                  },
+                  {
+                    "option": "Pakistan"
+                  },
+                  {
+                    "option": "Philippines"
+                  },
+                  {
+                    "option": "Poland"
+                  },
+                  {
+                    "option": "Portugal"
+                  },
+                  {
+                    "option": "Romania"
+                  },
+                  {
+                    "option": "Saudi Arabia"
+                  },
+                  {
+                    "option": "Serbia"
+                  },
+                  {
+                    "option": "Singapore"
+                  },
+                  {
+                    "option": "South Africa"
+                  },
+                  {
+                    "option": "South Korea"
+                  },
+                  {
+                    "option": "Spain"
+                  },
+                  {
+                    "option": "Sri Lanka"
+                  },
+                  {
+                    "option": "Sweden"
+                  },
+                  {
+                    "option": "Switzerland"
+                  },
+                  {
+                    "option": "Taiwan"
+                  },
+                  {
+                    "option": "Thailand"
+                  },
+                  {
+                    "option": "Tunisia"
+                  },
+                  {
+                    "option": "Turkiye"
+                  },
+                  {
+                    "option": "Ukraine"
+                  },
+                  {
+                    "option": "United Arab Emirates"
+                  },
+                  {
+                    "option": "United Kingdom"
+                  },
+                  {
+                    "option": "United States"
+                  },
+                  {
+                    "option": "Vietnam"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Language",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Arabic"
+                  },
+                  {
+                    "option": "Bengali"
+                  },
+                  {
+                    "option": "Bulgarian"
+                  },
+                  {
+                    "option": "Chinese (Simplified)"
+                  },
+                  {
+                    "option": "Chinese (Traditional)"
+                  },
+                  {
+                    "option": "Croatian"
+                  },
+                  {
+                    "option": "Czech"
+                  },
+                  {
+                    "option": "Danish"
+                  },
+                  {
+                    "option": "Dutch"
+                  },
+                  {
+                    "option": "English"
+                  },
+                  {
+                    "option": "Estonian"
+                  },
+                  {
+                    "option": "Finnish"
+                  },
+                  {
+                    "option": "French"
+                  },
+                  {
+                    "option": "German"
+                  },
+                  {
+                    "option": "Greek"
+                  },
+                  {
+                    "option": "Hebrew"
+                  },
+                  {
+                    "option": "Hindi"
+                  },
+                  {
+                    "option": "Hungarian"
+                  },
+                  {
+                    "option": "Indonesian"
+                  },
+                  {
+                    "option": "Italian"
+                  },
+                  {
+                    "option": "Japanese"
+                  },
+                  {
+                    "option": "Korean"
+                  },
+                  {
+                    "option": "Macedonian"
+                  },
+                  {
+                    "option": "Malay"
+                  },
+                  {
+                    "option": "Norwegian (Bokmål)"
+                  },
+                  {
+                    "option": "Polish"
+                  },
+                  {
+                    "option": "Portuguese"
+                  },
+                  {
+                    "option": "Romanian"
+                  },
+                  {
+                    "option": "Russian"
+                  },
+                  {
+                    "option": "Serbian"
+                  },
+                  {
+                    "option": "Slovak"
+                  },
+                  {
+                    "option": "Spanish"
+                  },
+                  {
+                    "option": "Swedish"
+                  },
+                  {
+                    "option": "Tagalog"
+                  },
+                  {
+                    "option": "Thai"
+                  },
+                  {
+                    "option": "Turkish"
+                  },
+                  {
+                    "option": "Ukrainian"
+                  },
+                  {
+                    "option": "Urdu"
+                  },
+                  {
+                    "option": "Vietnamese"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Pages_Per_Competitor",
+              "fieldType": "number",
+              "placeholder": "5 (Max Pages per Competitor)"
+            },
+            {
+              "fieldLabel": "Keywords_Per_Page",
+              "fieldType": "number",
+              "placeholder": "50 (Max Keywords per Page)"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -1056,
+        352
+      ],
+      "id": "5ff75444-a611-41d2-9534-3afd68577cea",
+      "name": "Submit Form",
+      "webhookId": "a86796c6-f546-4793-8037-c3f4bd47066f",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get Country & Language code": {
+      "main": [
+        [
+          {
+            "node": "Set Input Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "SERP Competitors",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Competitor Collector",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Competitors Domain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SERP Competitors": {
+      "main": [
+        [
+          {
+            "node": "Competitor Collector",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Competitor Top Pages": {
+      "main": [
+        [
+          {
+            "node": "Structure Competitor Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Page Ranked Keywords": {
+      "main": [
+        [
+          {
+            "node": "Build Page Strategy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structure Competitor Data": {
+      "main": [
+        [
+          {
+            "node": "Split Out Top Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Page Strategy": {
+      "main": [
+        [
+          {
+            "node": "Aggregate All Item Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out KW",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Drive Path Complete",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Update Keyword List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flattening Code": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate All Item Data": {
+      "main": [
+        [
+          {
+            "node": "Master Strategist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drive Path Complete": {
+      "main": [
+        [
+          {
+            "node": "Wait for All",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Create Doc": {
+      "main": [
+        [
+          {
+            "node": "Move file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Master Strategist": {
+      "main": [
+        [
+          {
+            "node": "Output Parser",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Create Doc",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare Articles",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Prepare Pillars",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move file": {
+      "main": [
+        [
+          {
+            "node": "Update Report Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Keyword List": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Link": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out KW": {
+      "main": [
+        [
+          {
+            "node": "Flattening Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Top Pages": {
+      "main": [
+        [
+          {
+            "node": "Get Page Ranked Keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Main Keyword": {
+      "main": [
+        [
+          {
+            "node": "Get Country & Language code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SEVOsmith_Trigger": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Get Main Keyword",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Input Data": {
+      "main": [
+        [
+          {
+            "node": "Generate_Session_ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparation": {
+      "main": [
+        [
+          {
+            "node": "Update Session ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Competitors Domain": {
+      "main": [
+        [
+          {
+            "node": "Competitor Collector",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Competitor Collector": {
+      "main": [
+        [
+          {
+            "node": "Get Existing Competitors",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Existing Competitors": {
+      "main": [
+        [
+          {
+            "node": "Smart Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Smart Merge": {
+      "main": [
+        [
+          {
+            "node": "Update Competitors List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Competitors List": {
+      "main": [
+        [
+          {
+            "node": "Get Competitor Top Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate_Session_ID": {
+      "main": [
+        [
+          {
+            "node": "Preparation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Report Link": {
+      "main": [
+        [
+          {
+            "node": "Wait for All",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Update Session ID": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output Parser": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for All": {
+      "main": [
+        [
+          {
+            "node": "Get Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Articles": {
+      "main": [
+        [
+          {
+            "node": "Update Articles Plan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Pillars": {
+      "main": [
+        [
+          {
+            "node": "Update Pillar Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Articles Plan": {
+      "main": [
+        [
+          {
+            "node": "Wait for All",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Update Pillar Articles": {
+      "main": [
+        [
+          {
+            "node": "Wait for All",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Gemini 3 Pro": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Master Strategist",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "bc698b8d-282f-470d-a801-26af651917d2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "11e9efcdcf8b81c33a6dc0fbb8a65585e44890419633abdd99da8b32fbffb48e"
+  },
+  "id": "FUjGhwqUNwKyayoT",
+  "tags": []
+}
